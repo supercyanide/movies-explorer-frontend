@@ -1,0 +1,17 @@
+.navigation{
+    display: flex;
+    justify-content: space-between;
+    gap: 20px;
+}
+.navigation__link{
+    margin: 0;
+    padding: 0;
+    color: black;
+    font-size: 14px;
+    font-family: 'Inter';
+    align-self: center;
+    text-decoration: none;
+}
+.navigation__link_movies{
+    font-weight: 500;
+}

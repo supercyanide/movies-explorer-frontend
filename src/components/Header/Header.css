@@ -1,0 +1,31 @@
+.header{
+    min-height: 78px;
+    display: flex;
+    justify-content: space-between;
+}
+.header__info{
+    display: flex;
+    gap: 50px;
+}
+.header__link_account{
+    font-family: 'Inter';
+    font-size: 14px;
+    margin: 0;
+    padding: 0;
+    align-self: center;
+    margin-right: 70px;
+    min-width: 100px;
+    display: flex;
+    gap: 13px;
+}
+.header__logo{
+    height: fit-content;
+    align-self: center;
+    margin-left: 70px;
+}
+.header__accout-logo{
+    width: 30px;
+    height: 30px;
+    background-image: url(../../images/123.svg);
+    align-self: center;
+}
