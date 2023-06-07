@@ -1,5 +1,5 @@
 import logoPath from '../../images/logo.svg';
-// import accountSvgPath from '../../images/profile.svg';
+import accountSvgPath from '../../images/profile.svg';
 import './Header.css';
 import React from 'react';
 import Navigation from '../Navigation/Navigation';
@@ -16,7 +16,7 @@ export default function Header() {
                 <Navigation/>
                 <div className='header__link header__link_account'>
                     <p>Аккаунт</p>
-                    <image className='header__accout-logo'/>
+                    <img alt='Аккаунт' src = {accountSvgPath} className='header__accout-logo'></img>
                 </div>
 
                 {/* <p className="header__email">{email}</p> */}

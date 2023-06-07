@@ -2,6 +2,7 @@
     min-height: 217px;
     display: grid;
     padding: 0 70px;
+    font-family: 'Inter';
 }
 .search-form__submit-btn{
     width: 34px;
@@ -21,10 +22,9 @@
     border-bottom: 1px #E8E8E8 solid;
 }
 .search-form__input{
-    min-width: 966px;
+    width: 95%;
     border: none;
     color: black;
-    font-family: 'Inter';
     padding: 0;
     font-size: 28px;
 }
@@ -34,14 +34,4 @@
 
 .search-form__input:focus{
     outline: none;
-}
-.search-form__option-btn{
-    width: 36px;
-    height: 20px;
-    border: none;
-    background-color: transparent;
-    background-image: url(../../images/smalltumb-off.svg);
-}
-.search-form__option-btn_active{
-    background-image: url(../../images/smalltumb-on.svg);
 }

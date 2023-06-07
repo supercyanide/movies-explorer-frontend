@@ -3,6 +3,7 @@ import React from 'react';
 import { useState, useEffect } from 'react';
 import Header from '../Header/Header';
 import SearchForm from '../SearchForm/SearchForm';
+import Movies from '../Movies/Movies';
 import { Route, Switch, Redirect, useNavigate, Routes, BrowserRouter } from 'react-router-dom';
 
 function App() {
@@ -15,6 +16,14 @@ function App() {
         <>
           <Header/>
           <SearchForm/>
+          <Movies/>
+        </>
+        }/>
+        <Route path='/movies' element={
+        <>
+          <Header/>
+          <SearchForm/>
+          <Movies/>
         </>
         }/>
       </Routes>

@@ -1,0 +1,64 @@
+{
+    "data":{
+        "1":{
+            "name":"33 слова о дизайне",
+            "cover":"../images/covers/pic12.png",
+            "duration":"1ч 47м"
+        },
+        "2":{
+            "name":"Киноальманах «100 лет дизайна»",
+            "cover":"../images/covers/pic11.png",
+            "duration":"1ч 47м"
+        },
+        "3":{
+            "name":"В погоне за Бенкси",
+            "cover":"../images/covers/pic10.png",
+            "duration":"1ч 47м"
+        },
+        "4":{
+            "name":"Баския: Взрыв реальности",
+            "cover":"../images/covers/pic9.png",
+            "duration":"1ч 47м"
+        },
+        "5":{
+            "name":"Бег это свобода",
+            "cover":"../images/covers/pic8.png",
+            "duration":"1ч 47м"
+        },
+        "6":{
+            "name":"Книготорговцы",
+            "cover":"../images/covers/pic7.png",
+            "duration":"1ч 47м"
+        },
+        "7":{
+            "name":"Когда я думаю о Германии ночью",
+            "cover":"../images/covers/pic6.png",
+            "duration":"1ч 47м"
+        },
+        "8":{
+            "name":"Gimme Danger: История Игги и The Stooge...",
+            "cover":"../images/covers/pic5.png",
+            "duration":"1ч 47м"
+        },
+        "9":{
+            "name":"Дженис: Маленькая девочка грустит",
+            "cover":"../images/covers/pic4.png",
+            "duration":"1ч 47м"
+        },
+        "10":{
+            "name":"Соберись перед прыжком",
+            "cover":"../images/covers/pic3.png",
+            "duration":"1ч 47м"
+        },
+        "11":{
+            "name":"Пи Джей Харви: A dog called money",
+            "cover":"../images/covers/pic2.png",
+            "duration":"1ч 47м"
+        },
+        "12":{
+            "name":"По волнам: Искусство звука в кино",
+            "cover":"../images/covers/pic1.png",
+            "duration":"1ч 47м"
+        }
+    }
+}

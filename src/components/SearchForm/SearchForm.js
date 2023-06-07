@@ -1,4 +1,5 @@
 import './SearchForm.css';
+import FilterCheckbox from '../FilterCheckbox/FilterCheckbox';
 
 export default function SearchForm(){
     return(
@@ -8,7 +9,7 @@ export default function SearchForm(){
                 <button type='submit' className='search-form__submit-btn'></button>
             </form>
             <div className='search-form__option'>
-                <button className='search-form__option-btn'></button>
+                <FilterCheckbox/>
             </div>
             
         </div>
