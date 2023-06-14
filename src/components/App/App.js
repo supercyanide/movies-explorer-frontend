@@ -9,6 +9,7 @@ import Main from '../Main/Main';
 import Profile from '../Profile/Profile';
 import Footer from '../Footer/Footer';
 import SavedMovies from '../SavedMovies/SavedMovies';
+import Register from '../Register/Register';
 
 function App() {
   return (
@@ -46,6 +47,9 @@ function App() {
             <Profile/>
 
           </>
+          }/>
+          <Route path='/signup' element={
+            <Register/>
           }/>
         </Routes>
       </BrowserRouter>
