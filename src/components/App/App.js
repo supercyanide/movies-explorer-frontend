@@ -10,6 +10,7 @@ import Profile from '../Profile/Profile';
 import Footer from '../Footer/Footer';
 import SavedMovies from '../SavedMovies/SavedMovies';
 import Register from '../Register/Register';
+import Login from '../Login/Login';
 
 function App() {
   return (
@@ -50,6 +51,9 @@ function App() {
           }/>
           <Route path='/signup' element={
             <Register/>
+          }/>
+          <Route path='/signin' element={
+            <Login/>
           }/>
         </Routes>
       </BrowserRouter>
