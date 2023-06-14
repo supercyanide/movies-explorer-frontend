@@ -20,6 +20,9 @@
     .movies {
         padding: 70px 30px 27px;
     }
+    .movies_saved {
+        padding-bottom: 169px;
+    }
 }
   
 @media screen and (max-width: 680px) {

@@ -19,10 +19,6 @@
 .load-more-btn:hover{
     background-color: #E8E8E8;
 }
-@media screen and (max-width: 768px) {
-    .load-more-btn{
-    }
-}
 @media screen and (max-width: 400px) {
     .load-more-btn{
         width: 240px;

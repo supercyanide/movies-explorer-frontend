@@ -143,9 +143,6 @@
         font-size: 11px;
 
     }
-    .about-me__photo {
-
-    }
     .about-me__bio {
         font-size: 11px;
         line-height: 16px;
@@ -153,9 +150,6 @@
     .about-me__person {
         margin-top: 61px;
         row-gap: 18px;
-
-    }
-    .about-me__contacts {
 
     }
 }

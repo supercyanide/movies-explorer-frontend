@@ -43,15 +43,6 @@
     .footer__title{
         max-width: 708px;
     }
-    .footer__items{
-
-    }
-    .footer__item{
-
-    }
-    .footer__links{
-
-    }
 }
 @media screen and (max-width: 400px) {
     .footer{
@@ -68,7 +59,7 @@
         flex-direction: column-reverse;
         align-items:center;
         margin: 0;
-        margin-bottom: 20px;
+        margin-bottom: 22px;
     }
     .footer__item{
         font-size: 12px;
@@ -76,7 +67,7 @@
     }
     .footer__links{
         flex-direction: column;
-        gap: 14px;
+        gap: 13px;
         align-items:center;
         margin-bottom: 32px;
     }

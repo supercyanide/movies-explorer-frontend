@@ -101,10 +101,7 @@
         flex-direction: row;
         justify-content: space-between;
         height: 100%;
-        padding: 9px 4px 14px 14px;
-    }
-    .card__button{
-        margin-right: 10px;
+        padding: 9px 14px 14px 14px;
     }
 }
 @media screen and (max-width: 400px) {
