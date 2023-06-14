@@ -1,25 +1,24 @@
 import './MoviesCardList.css';
-import { movies } from '../../utils/movies';
+import LoadMoreButton from '../LoadMoreButton/LoadMoreButton';
+
 import MoviesCard from '../MoviesCard/MoviesCard.js';
 
-export default function MoviesCardList(){
+export default function MoviesCardList({ InitialMovies = [], buttonClassName, isMoreButton}){
     return(
         <>
-        <section className='movies'>
-            {
-                movies.map((movie) => (
+        <ul className={`movies ${isMoreButton ? '' : 'movies_saved'}`}>
+            {InitialMovies.length === 0 ? <li className="movies-card-list__title">Фильмов не найдено</li>
+            :   InitialMovies.map((movie) => (
                     <MoviesCard
                         imageUrl={movie.cover}
                         name={movie.name}
                         duration={movie.duration}
+                        buttonClassName={buttonClassName}
                     />
                 ))
             }
-            
-        </section>
-        <div className='movies__more'>
-            <button className='movies__more-btn'>Ещё</button>
-        </div>
+        </ul>
+        {isMoreButton? <LoadMoreButton/> : ''}
         </>
     )
 }

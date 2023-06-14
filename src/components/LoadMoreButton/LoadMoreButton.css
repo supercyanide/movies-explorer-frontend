@@ -1,0 +1,30 @@
+.load-more{
+    display: flex;
+    height: 166px;
+    flex-direction: row;
+    justify-content: center;
+}
+.load-more-btn{
+    width: 320px;
+    height: 36px;
+    padding: 0;
+    background-color: #FFFFFF;
+    border: 1px solid #E8E8E8;
+    border-radius: 6px;
+    font-size: 12px;
+    cursor: pointer;
+    transition: all 0.1s linear;
+    margin-top: 50px;
+}
+.load-more-btn:hover{
+    background-color: #E8E8E8;
+}
+@media screen and (max-width: 768px) {
+    .load-more-btn{
+    }
+}
+@media screen and (max-width: 400px) {
+    .load-more-btn{
+        width: 240px;
+    }
+}

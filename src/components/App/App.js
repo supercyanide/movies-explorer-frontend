@@ -5,29 +5,51 @@ import Header from '../Header/Header';
 import SearchForm from '../SearchForm/SearchForm';
 import Movies from '../Movies/Movies';
 import { Route, Switch, Redirect, useNavigate, Routes, BrowserRouter } from 'react-router-dom';
+import Main from '../Main/Main';
+import Profile from '../Profile/Profile';
+import Footer from '../Footer/Footer';
+import SavedMovies from '../SavedMovies/SavedMovies';
 
 function App() {
-  const headerEndpoints = ['/movies', '/saved-movies', '/profile', '/'];
-  const footerEndpoints = ['/movies', '/saved-movies', '/'];
   return (
-    <BrowserRouter>
-      <Routes>
-        <Route path='/' element={
-        <>
-          <Header/>
-          <SearchForm/>
-          <Movies/>
-        </>
-        }/>
-        <Route path='/movies' element={
-        <>
-          <Header/>
-          <SearchForm/>
-          <Movies/>
-        </>
-        }/>
-      </Routes>
-    </BrowserRouter>
+    <div className='page'>
+      <BrowserRouter>
+        <Routes>
+          <Route path='/' element={
+          <>
+            <Header
+              isLogged={false}
+            />
+            <Main/>
+            <Footer/>
+          </>
+          }/>
+          <Route path='/movies' element={
+          <>
+            <Header isLogged={true}/>
+            <SearchForm/>
+            <Movies/>
+            <Footer/>
+          </>
+          }/>
+          <Route path='/saved-movies' element={
+          <>
+            <Header isLogged={true}/>
+            <SearchForm/>
+            <SavedMovies/>
+            <Footer/>
+          </>
+          }/>
+          <Route path='/profile' element={
+          <>
+            <Header isLogged={true}/>
+            <Profile/>
+
+          </>
+          }/>
+        </Routes>
+      </BrowserRouter>
+    </div>
     
   );
 }

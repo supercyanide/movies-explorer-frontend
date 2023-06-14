@@ -1,12 +1,16 @@
 import './Movies.css';
 import MoviesCardList from '../MoviesCardList/MoviesCardList';
-import Footer from '../Footer/Footer';
+import { InitialMovies } from '../../utils/movies';
 
 export default function Movies(){
     return(
         <>
-            <MoviesCardList/>
-            <Footer/>
+            <MoviesCardList
+                InitialMovies={InitialMovies}
+                buttonClassName='card__like-button'
+                isMoreButton={true}
+            />
         </>
     )
 }
+

@@ -1,17 +1,121 @@
-.navigation{
+.navigation {
+  display: flex;
+  gap: 30px;
+  align-items: center;
+}
+
+.navigation_logged {
+  display: flex;
+  width: 100%;
+  justify-content: flex-end;
+  column-gap: 48px;
+  
+}
+
+.navigation__link {
+  color: black;
+  text-decoration: none;
+  font-size: 12px;
+  font-weight: 500;
+  line-height: 16px;
+  display: flex;
+  align-items: center;
+}
+.navigation__link_logged {
+  font-size: 14px;
+}
+
+.navigation__link_profile{
+  min-width: 100px;
+}
+
+.navigation__pages-links{
+  display: flex;
+  gap: 20px;
+}
+
+.navigation__link:hover {
+  text-decoration: underline;
+}
+
+.navigation__link_sign-in {
+  color: black;
+  background-color: #2BE080;
+  border-radius: 3px;
+  padding: 8px 20px;
+  transition: opacity 0.3s ease;
+}
+
+.navigation__link_sign-in:hover {
+  opacity: 0.6;
+}
+
+.navigation__link_profile::after {
+  content: "";
+  background-image: url(../../images/profile.svg);
+  margin-left: 13px;
+  display: block;
+  width: 30px;
+  height: 30px;
+  background-color: #FFFFFF;
+  background-repeat: no-repeat;
+  background-position: center;
+  border-radius: 4px;
+  transition: background-color 0.3s ease;
+}
+
+.navigation__link_profile:hover::after {
+  background-color: rgb(190, 180, 180);
+}
+
+.navigation__menu {
+  padding: 0;
+  border: 0;
+  background-image: url(../../images/burger.svg);
+  background-position: center;
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-color: transparent;
+  height: 44px;
+  width: 44px;
+  display: none;
+  transition: opacity 0.3s ease;
+}
+.navigation__menu:hover {
+  opacity: 0.6;
+}
+
+@media screen and (max-width: 768px) {
+  .navigation_logged {
     display: flex;
-    justify-content: space-between;
-    gap: 20px;
+    justify-content: flex-end;
+  }
+  
+  .navigation__menu {
+    display: inline-block;
+  }
+
+  .navigation__link_logged {
+    display: none;
+  }
 }
-.navigation__link{
-    margin: 0;
-    padding: 0;
-    color: black;
-    font-size: 14px;
-    font-family: 'Inter';
-    align-self: center;
-    text-decoration: none;
-}
-.navigation__link_movies{
+
+@media screen and (max-width: 540px) {
+  .navigation {
+    gap: 14px;
+  }
+  .navigation__link {
+    font-size: 10px;
     font-weight: 500;
+    line-height: 16px;
+    padding: 0;
+  }
+  .navigation__link_sign-in {
+    padding: 5px 12px;
+  }
+
+  .navigation__menu {
+    width: 40px;
+    height: 43px;
+  }
 }

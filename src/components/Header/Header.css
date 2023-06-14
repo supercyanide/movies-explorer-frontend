@@ -1,30 +1,41 @@
-.header{
-    min-height: 78px;
+.header {
     display: flex;
     justify-content: space-between;
+    align-items: center;
+    margin: 18px 70px 18px;;
+    background-color: white;
+    color: black;
+    min-height: 38px;
 }
-.header__info{
-    display: flex;
-    gap: 50px;
-}
-.header__link_account{
-    font-family: 'Inter';
-    font-size: 14px;
-    margin: 0;
-    padding: 0;
-    align-self: center;
-    margin-right: 70px;
-    min-width: 100px;
-    display: flex;
-    gap: 13px;
+  
+.header_logged {
+    gap: 44px;
 }
 .header__logo{
     height: fit-content;
     align-self: center;
-    margin-left: 70px;
+    width: 38px;
+    height: 38px;
 }
-.header__accout-logo{
-    width: 30px;
-    height: 30px;
-    align-self: center;
+.header_theme_dark {
+    background-color: #5c5c5c;
+    color: white;
+}
+  
+@media screen and (max-width: 768px) {
+    .header {
+        margin: 18px 30px 18px;
+    }
+    .header_logged {
+        margin: 15px 30px 20px;
+    }
+}
+  
+@media screen and (max-width: 540px) {
+    .header {
+        margin: 18px 15px 18px;
+    }
+    .header_logged {
+        margin: 15px 15px 20px;
+    }
 }

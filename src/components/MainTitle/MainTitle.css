@@ -1,0 +1,18 @@
+.main-title {
+    margin: 0;
+    font-size: 22px;
+    font-weight: normal;
+    line-height: 27px;
+    display: inline-block;
+    width: 100%;
+    border-bottom: 1px solid black;
+    padding-bottom: 23px;
+    letter-spacing: -1px;
+}
+@media screen and (max-width: 400px) {
+    .main-title {
+        font-size: 18px;
+        padding-bottom: 24px;
+        letter-spacing: -0.7px;
+    }
+}
