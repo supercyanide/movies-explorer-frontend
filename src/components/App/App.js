@@ -1,10 +1,10 @@
 import './App.css';
 import React from 'react';
 import { useState, useEffect } from 'react';
+import { Route, Switch, Redirect, useNavigate, Routes, BrowserRouter } from 'react-router-dom';
 import Header from '../Header/Header';
 import SearchForm from '../SearchForm/SearchForm';
 import Movies from '../Movies/Movies';
-import { Route, Switch, Redirect, useNavigate, Routes, BrowserRouter } from 'react-router-dom';
 import Main from '../Main/Main';
 import Profile from '../Profile/Profile';
 import Footer from '../Footer/Footer';

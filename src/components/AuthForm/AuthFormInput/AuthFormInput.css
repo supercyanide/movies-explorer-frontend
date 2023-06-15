@@ -7,7 +7,7 @@
     flex-direction: column;
     width: 100%;
 }
-  
+
 .input__input {
     outline: none;
     border: 0;
@@ -26,13 +26,13 @@
     border-bottom: 1px solid #FF6838;
 }
 .input__input_error{
-    color: rgba(238, 52, 101, 1);
+    color: #EE3465;
 }
 .input__error {
     font-size: 10px;
     font-weight: 400;
     line-height: 12px;
-    color: rgba(238, 52, 101, 1);
+    color: #EE3465;
 }
   
 @media screen and (max-width: 480px) {

@@ -23,6 +23,7 @@
   flex-grow: 1;
 }
 
+
 .profile-input__input:focus {
   outline: 0;
 }
