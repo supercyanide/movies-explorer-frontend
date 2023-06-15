@@ -1,7 +1,7 @@
 import './App.css';
 import React from 'react';
-import { useState, useEffect } from 'react';
-import { Route, Switch, Redirect, useNavigate, Routes, BrowserRouter } from 'react-router-dom';
+import { useState } from 'react';
+import { Route, Routes, BrowserRouter } from 'react-router-dom';
 import Header from '../Header/Header';
 import SearchForm from '../SearchForm/SearchForm';
 import Movies from '../Movies/Movies';
@@ -11,10 +11,18 @@ import Footer from '../Footer/Footer';
 import SavedMovies from '../SavedMovies/SavedMovies';
 import Register from '../Register/Register';
 import Login from '../Login/Login';
+import Page404 from '../Page404/Page404';
+import ErrorPopup from '../ErrorPopup/ErrorPopup';
 
 function App() {
+
+  const [isErrorPopup, setErrorPopup] = useState(false);
+
+  const closeErrorPopup = () => setErrorPopup(false);
+
   return (
     <div className='page'>
+      <ErrorPopup titleText="Какая-то ошибка" popupText="Текст какой-то ошбики" submitText="ОК" onClose={closeErrorPopup} isOpen={isErrorPopup} />
       <BrowserRouter>
         <Routes>
           <Route path='/' element={
@@ -54,6 +62,9 @@ function App() {
           }/>
           <Route path='/signin' element={
             <Login/>
+          }/>
+          <Route path='*' element={
+            <Page404/>
           }/>
         </Routes>
       </BrowserRouter>

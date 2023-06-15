@@ -64,10 +64,6 @@
   transition: background-color 0.3s ease;
 }
 
-.navigation__link_profile:hover::after {
-  background-color: rgb(190, 180, 180);
-}
-
 .navigation__menu {
   padding: 0;
   border: 0;
