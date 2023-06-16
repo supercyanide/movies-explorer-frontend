@@ -69,7 +69,7 @@
     width: 42px;
     height: 42px;
     background-image: url(../../images/close-popup.svg);
-    background-color: rgba(0, 0, 0, 0);
+    background-color: transparent;
     background-position: center;
     background-size: 32px;
     background-repeat: no-repeat;

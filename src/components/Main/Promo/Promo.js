@@ -3,13 +3,13 @@ import NavTab from '../NavTab/NavTab';
 
 export default function Promo(){
     return(
-        <div className='promo'>
+        <section className='promo'>
             <div className='promo__landing'>
                 <h1 className='promo__title'>Учебный проект студента факультета Веб-разработки.</h1>
                 <div className='promo__nav'>
                     <NavTab/>
                 </div>
             </div>
-        </div>
-    )
+        </section>
+    );
 }

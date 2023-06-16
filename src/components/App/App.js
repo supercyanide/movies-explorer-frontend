@@ -26,36 +26,33 @@ function App() {
       <BrowserRouter>
         <Routes>
           <Route path='/' element={
-          <>
-            <Header
-              isLogged={false}
-            />
-            <Main/>
-            <Footer/>
-          </>
+            <>
+              <Header isLogged={false}/>
+              <Main/>
+              <Footer/>
+            </>
           }/>
           <Route path='/movies' element={
-          <>
-            <Header isLogged={true}/>
-            <SearchForm/>
-            <Movies/>
-            <Footer/>
-          </>
+            <>
+              <Header isLogged={true}/>
+              <SearchForm/>
+              <Movies/>
+              <Footer/>
+            </>
           }/>
           <Route path='/saved-movies' element={
-          <>
-            <Header isLogged={true}/>
-            <SearchForm/>
-            <SavedMovies/>
-            <Footer/>
-          </>
+            <>
+              <Header isLogged={true}/>
+              <SearchForm/>
+              <SavedMovies/>
+              <Footer/>
+            </>
           }/>
           <Route path='/profile' element={
-          <>
-            <Header isLogged={true}/>
-            <Profile/>
-
-          </>
+            <>
+              <Header isLogged={true}/>
+              <Profile/>
+            </>
           }/>
           <Route path='/signup' element={
             <Register/>
@@ -69,7 +66,6 @@ function App() {
         </Routes>
       </BrowserRouter>
     </div>
-    
   );
 }
 
