@@ -1,6 +1,6 @@
 import './ProfileInput.css';
 
-export default function ProfileInput({ caption, name, placeholder, value, onChange }) {
+export default function ProfileInput({ caption, name, placeholder, value, onChange, isReqired}) {
 
     return (
     <label className='profile-input__label'>
@@ -9,6 +9,7 @@ export default function ProfileInput({ caption, name, placeholder, value, onChan
             placeholder={placeholder}
             name={name}
             className="profile-input__input"
+            required={isReqired}
             value={value}
             onChange={({ target }) => onChange(target.value)} 
         />
