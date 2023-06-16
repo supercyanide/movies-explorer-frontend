@@ -27,8 +27,8 @@
   
 .techs__techs {
     margin: 100px 0 0;
-    list-style: none;
     padding: 0;
+    list-style: none;
     display: flex;
     gap: 10px;
     flex-wrap: wrap;
@@ -83,6 +83,7 @@
         padding: 68px 18px;
         background-color: white;
     }
+    
     .techs__title {
         margin-top: 61px;
         font-size: 30px;

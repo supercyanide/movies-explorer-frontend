@@ -1,4 +1,3 @@
-import './Movies.css';
 import MoviesCardList from '../MoviesCardList/MoviesCardList';
 import { InitialMovies } from '../../utils/movies';
 

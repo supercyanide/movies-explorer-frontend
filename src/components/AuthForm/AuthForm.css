@@ -59,7 +59,7 @@
 .auth-form__button {
     padding: 0;
     border: 0;
-    color: white;
+    color: #FFFFFF;
     font-size: 14px;
     font-weight: 500;
     display: flex;
@@ -82,6 +82,7 @@
         max-height: 800px;
         padding-top: 232px;
     }
+
     .auth-form__buttons {
         padding-top: 69px;
         padding-bottom: 232px;
@@ -93,22 +94,27 @@
         align-items: center;
         padding: 56px 30px 30px;
     }
+
     .auth-form__buttons{
         padding-top: 157px;
         padding-bottom: 30px;
         min-width: 260px;
         gap: 12px;
     }
+
     .auth-form__title {
         margin: 51px 0 81px 0;
     }
+
     .auth-form__text{
         font-size: 11px;
         letter-spacing: 0.6px;
     }
+
     .auth-form__link{
         font-size: 11px;
     }
+    
     .auth-form__button {
         min-width: unset;
         width: 100%;

@@ -6,9 +6,11 @@
     list-style: none;
     margin: 0;
 }
+
 .movies_saved{
     padding-bottom: 247px;
 }
+
 @media screen and (max-width: 1024px) {
     .movies {
       padding-left: 30px;

@@ -11,15 +11,12 @@
 .header_logged {
     gap: 44px;
 }
+
 .header__logo{
     height: fit-content;
     align-self: center;
     width: 38px;
     height: 38px;
-}
-.header_theme_dark {
-    background-color: #5c5c5c;
-    color: white;
 }
   
 @media screen and (max-width: 768px) {

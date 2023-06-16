@@ -22,7 +22,7 @@ function App() {
 
   return (
     <div className='page'>
-      <ErrorPopup titleText="Какая-то ошибка" popupText="Текст какой-то ошбики" submitText="ОК" onClose={closeErrorPopup} isOpen={isErrorPopup} />
+      <ErrorPopup titleText="Ошибка" popupText="Сообщение ошибки" submitText="ОК" onClose={closeErrorPopup} isOpen={isErrorPopup} />
       <BrowserRouter>
         <Routes>
           <Route path='/' element={

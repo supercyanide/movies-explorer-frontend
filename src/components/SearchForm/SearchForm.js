@@ -4,7 +4,6 @@ import { useState } from 'react';
 
 export default function SearchForm(){
     const [isChecked, setChecked] = useState(false);
-    const [isFocused, setFocused] = useState(false);
 
     function handleChange({ target: { checked: newState } }) {
         setChecked(newState);
