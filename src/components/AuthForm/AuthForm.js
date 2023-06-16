@@ -10,7 +10,17 @@ export default function AuthForm({ inputs, title, formName, buttonName, bottomTe
             <img alt='Лого' src={LogoPath} className='input__logo'/>
             <h1 className="auth-form__title">{title}</h1>
             <fieldset className="auth-form__inputs">
-                {inputs.map(({ caption, name, error, type, isValid }, i) => <AuthFormInput key={i} label={caption} type={type} name={name} error={error} isValid={isValid} />)}
+                {inputs.map(({ caption, name, error, type, isValid, isReqired }, i) => 
+                    <AuthFormInput 
+                        key={i} 
+                        label={caption} 
+                        type={type} 
+                        name={name} 
+                        error={error} 
+                        isValid={isValid} 
+                        isReqired={isReqired}
+                    />
+                )}
             </fieldset>
             <fieldset className="auth-form__buttons">
                 <button className="auth-form__button" type="submit">{buttonName}</button>

@@ -1,30 +1,35 @@
 export const registerInputs = [
     { 
         caption: "Имя", 
-        name: "name" 
+        name: "name",
+        isReqired: false,
     }, 
     { 
         caption: 'E-mail', 
         name: 'email', 
-        type:'email' 
+        type:'email',
+        isReqired: true,
     }, 
     { 
         caption: 'Пароль', 
         name: 'password', 
         error:'Что-то пошло не так...', 
         type:'password', 
-        isValid: false 
+        isValid: false,
+        isReqired: true,
     }
 ];
 export const loginInputs = [
     { 
         caption: 'E-mail', 
         name: 'email', 
-        type:'email' 
+        type:'email',
+        isReqired: true,
     }, 
     { 
         caption: 'Пароль', 
         name: 'password', 
-        type:'password'
+        type:'password',
+        isReqired: true,
     }
 ];

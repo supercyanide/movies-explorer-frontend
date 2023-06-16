@@ -13,8 +13,8 @@ export default function Profile() {
     return (<form className="profile" name='profile'>
         <h2 className="profile__title">Привет, {name}!</h2>
         <fieldset className="profile__inputs">
-            <ProfileInput caption="Имя" name='name' placeholder='Введите имя' value={name} onChange={handleNameChange} />
-            <ProfileInput caption="E-mail" name='email' placeholder='Введите адрес электронной почты' value={email} onChange={handleEmailChange} />
+            <ProfileInput caption="Имя" name='name' placeholder='Введите имя' value={name} onChange={handleNameChange} isRequired={true} />
+            <ProfileInput caption="E-mail" name='email' placeholder='Введите адрес электронной почты' value={email} onChange={handleEmailChange} isRequired={true} />
         </fieldset>
         <fieldset className="profile__buttons">
             <button type="button" className="profile__button">Редактировать</button>
