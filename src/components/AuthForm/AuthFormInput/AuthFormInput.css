@@ -24,10 +24,14 @@
   
 .input-block__input:focus {
     border-bottom: 1px solid #FF6838;
+    /* border-radius: 5px; */
+    /* box-shadow: 0px 6px 10px 0px rgba(255, 104, 56, 0.1); */
 }
+
 .input-block__input_error{
     color: #EE3465;
 }
+
 .input-block__error {
     font-size: 10px;
     font-weight: 400;
