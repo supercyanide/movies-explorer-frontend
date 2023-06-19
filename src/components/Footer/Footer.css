@@ -19,6 +19,16 @@
 .footer__item{
     font-size: 13px;
     margin: 0 0 20px;
+    transition: opacity 0.2s ease;
+}
+.footer__item_link{
+    text-decoration: none;
+    color: #000000;
+    transition: opacity 0.2s ease;
+}
+
+.footer__item_link:hover{
+    opacity: 0.6;
 }
 
 .footer__links{

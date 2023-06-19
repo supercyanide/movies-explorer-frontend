@@ -72,7 +72,7 @@
   margin-top: 20px;
 }
 
-.profile__button {
+.profile__control {
   background-color: #FFFFFF;
   border: 0;
   padding: 0;
@@ -82,13 +82,14 @@
   cursor: pointer;
 }
 
-.profile__button:hover {
+.profile__control:hover {
   text-decoration: underline;
 }
 
-.profile__button_signout {
+.profile__control_signout {
   color: #EE3465;
   font-weight: 500;
+  text-decoration: none;
 }
 
 @media screen and (max-width: 768px) {
@@ -125,7 +126,7 @@
     flex: 1 0 auto;
   }
 
-  .profile__button {
+  .profile__control {
     font-size: 12px;
     line-height: 14.5px;
     

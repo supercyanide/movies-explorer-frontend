@@ -1,6 +1,7 @@
 import './Profile.css';
 import ProfileInput from '../ProfileInput/ProfileInput';
 import { useState } from 'react';
+import { Link } from 'react-router-dom';
 
 export default function Profile() {
 
@@ -30,14 +31,14 @@ export default function Profile() {
             </fieldset>
             <fieldset className="profile__buttons">
                 {isSubmitVisible ?
-                    <div className='profile__submit-block ${isSubmitVisible'>
-                        <span className='profile__error'>При обновлении профиля произошла ошибка.</span>
-                        <button className='profile__submit' onClick={toggleControlsVisibility}>Сохранить</button>
+                    <div className="profile__submit-block ${isSubmitVisible">
+                        <span className="profile__error">При обновлении профиля произошла ошибка.</span>
+                        <button className="profile__submit" onClick={toggleControlsVisibility}>Сохранить</button>
                     </div>
                 :
-                    <div className='profile__control-block'>
-                        <button type="button" className="profile__button" onClick={toggleControlsVisibility}>Редактировать</button>
-                        <button type="button" className="profile__button profile__button_signout">Выйти из аккаунта</button>
+                    <div className="profile__control-block">
+                        <button type="button" className="profile__control" onClick={toggleControlsVisibility}>Редактировать</button>
+                        <Link to='/' className="profile__control profile__control_signout">Выйти из аккаунта</Link>
                     </div>
                 }
                 

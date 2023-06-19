@@ -14,7 +14,7 @@ export default function AboutMe() {
                 </p>
 
                 <ul className="about-me__contacts">
-                    <li><a href="https://github.com/" className="about-me__contact">Github</a></li>
+                    <li><a target="_blank" href="https://github.com/supercyanide" className="about-me__contact">Github</a></li>
                 </ul>
                 <img src={photo} alt="Моё фото" className="about-me__photo" />
             </div>
