@@ -7,6 +7,7 @@
     max-height: 700px;
     min-height: 100vh;
     box-sizing: border-box;
+    max-width: 396px;
 }
 
 .auth-form__title{
@@ -47,14 +48,14 @@
 }
   
 .auth-form__buttons {
+    margin-top: 20px;
+    padding: 0;
+    border: 0;
     display: flex;
     gap: 16px;
     flex-direction: column;
-    margin: 0;
     flex: 0 0 auto;
-    padding: 0;
     align-items: center;
-    border: 0;
 }
 
 .auth-form__button {
@@ -90,11 +91,6 @@
     .auth-form {
         max-height: 800px;
         padding: 232px 0;
-    }
-
-    .auth-form__buttons {
-        /* padding-top: 217px; */
-        /* padding-bottom: 232px; */
     }
 }
 

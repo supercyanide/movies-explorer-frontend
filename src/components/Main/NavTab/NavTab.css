@@ -13,7 +13,7 @@
     cursor: pointer;
     background-color: #E8E8E8;
     border-radius: 10px;
-    width: 96px;
+    min-width: 96px;
     height: 36px;
     display: flex;
     align-items: center;
@@ -40,13 +40,11 @@
     }
     .navtab__link{
         height: 26px;
-        width: 82px;
+        min-width: 82px;
     }
 }
 @media screen and (max-width: 400px) {
     .navtab__link{
-        height: 26px;
-        width: 82px;
         border-radius: 5px;
     }
     .navtab__block{

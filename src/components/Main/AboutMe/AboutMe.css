@@ -63,9 +63,8 @@
   
 .about-me__photo {
     max-width: 292px;
-    max-height: 352px;
     width: 270px;
-    height: 327px;
+    min-height: 327px;
     grid-area: photo;
     justify-self: end;
     object-fit: cover;
@@ -97,7 +96,7 @@
     }
     .about-me__photo {
         width: 255px;
-        height: 307px;
+        min-height: 307px;
     }
 }
 
