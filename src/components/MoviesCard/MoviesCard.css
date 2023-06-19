@@ -1,6 +1,13 @@
 .card__image{
+    height: 100%;
+    width: 100%;
+    height: 100%;
+}
+.card__trailer-link{
     height: 203px;
     width: auto;
+    margin: 0;
+    padding: 0;
 }
 
 .card__title{
@@ -84,7 +91,7 @@
         max-width: 339px;
         min-height: 262px;
     }
-    .card__image{
+    .card__trailer-link{
         height: 190px;
     }
 }
@@ -108,7 +115,7 @@
     .card {
         min-height: 237px;
     }
-    .card__image{
+    .card__trailer-link{
         height: 168px;
     }
     .card__title{

@@ -16,6 +16,7 @@ export default function MoviesCardList({ InitialMovies = [], buttonClassName, is
                             imageUrl={movie.cover}
                             name={movie.name}
                             duration={movie.duration}
+                            trailerUrl={movie.trailerUrl}
                             buttonClassName={buttonClassName}
                         />
                     ))
