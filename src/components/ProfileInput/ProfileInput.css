@@ -21,6 +21,10 @@
   text-align: right;
   flex-grow: 1;
 }
+.profile-input__input:disabled{
+  background-color: #FFFFFF;
+  color: black;
+}
 
 
 .profile-input__input:focus {

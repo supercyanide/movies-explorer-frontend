@@ -20,7 +20,7 @@
     line-height: 58px;
     letter-spacing: -2px;
 }
-.promo__nav{
+.promo__navtab{
     margin-bottom: 30px;
 }
 @media screen and (max-width: 768px) {
@@ -48,7 +48,7 @@
         line-height: 37px;
         letter-spacing: -1.1px;
     }
-    .promo__nav{
+    .promo__navtab{
         margin-bottom: 17px;
     }
 }

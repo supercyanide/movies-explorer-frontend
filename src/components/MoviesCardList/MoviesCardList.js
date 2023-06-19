@@ -5,20 +5,24 @@ import MoviesCard from '../MoviesCard/MoviesCard.js';
 
 export default function MoviesCardList({ InitialMovies = [], buttonClassName, isMoreButton}){
     return(
-        <>
-        <ul className={`movies ${isMoreButton ? '' : 'movies_saved'}`}>
-            {InitialMovies.length === 0 ? <li className="movies-card-list__title">Фильмов не найдено</li>
-            :   InitialMovies.map((movie) => (
-                    <MoviesCard
-                        imageUrl={movie.cover}
-                        name={movie.name}
-                        duration={movie.duration}
-                        buttonClassName={buttonClassName}
-                    />
-                ))
+        <section className='movies'>
+            {InitialMovies.length === 0 ? <h2 className="movies-card-list__title">Фильмов не найдено</h2>
+            :
+            <ul className={`movies-card-list ${isMoreButton ? '' : 'movies-card-list_saved'}`}>
+                {
+                    InitialMovies.map((movie, i) => (
+                        <MoviesCard
+                            key={i}
+                            imageUrl={movie.cover}
+                            name={movie.name}
+                            duration={movie.duration}
+                            buttonClassName={buttonClassName}
+                        />
+                    ))
+                }
+            </ul>
             }
-        </ul>
-        {isMoreButton? <LoadMoreButton/> : ''}
-        </>
+            {isMoreButton && InitialMovies.length>0 ? <LoadMoreButton/> : ''}
+        </section>
     )
 }

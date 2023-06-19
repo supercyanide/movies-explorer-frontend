@@ -4,7 +4,7 @@ import MainTitle from '../MainTitle/MainTitle';
 
 export default function AboutMe() {
     return (
-        <section className="about-me">
+        <section id='about-me' className="about-me">
             <MainTitle text="Студент" />
             <div className="about-me__person">
                 <h3 className="about-me__name">Виталий</h3>

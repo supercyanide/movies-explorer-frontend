@@ -5,7 +5,7 @@
     margin: 0 auto;
     padding: 70px 0 70px 0;
     max-height: 700px;
-    height: 100vh;
+    min-height: 100vh;
     box-sizing: border-box;
 }
 
@@ -43,7 +43,7 @@
     gap: 19px;
     padding: 0;
     margin: 0;
-    min-height: 266px;
+    flex: 1 0 auto;
 }
   
 .auth-form__buttons {
@@ -51,7 +51,8 @@
     gap: 16px;
     flex-direction: column;
     margin: 0;
-    padding: 69px 0 0 0;
+    flex: 0 0 auto;
+    padding: 0;
     align-items: center;
     border: 0;
 }
@@ -76,18 +77,27 @@
 .auth-form__button:hover {
     opacity: 0.6;
 }
+.auth-form__logo{
+    height: 38px;
+    width: 38px;
+    transition: opacity 0.3s ease;
+}
+.auth-form__logo:hover{
+    opacity: 0.6;
+}
 
 @media screen and (max-width: 786px) {
     .auth-form {
         max-height: 800px;
-        padding-top: 232px;
+        padding: 232px 0;
     }
 
     .auth-form__buttons {
-        padding-top: 69px;
-        padding-bottom: 232px;
+        /* padding-top: 217px; */
+        /* padding-bottom: 232px; */
     }
 }
+
 
 @media screen and (max-width: 480px) {
     .auth-form {
@@ -96,8 +106,7 @@
     }
 
     .auth-form__buttons{
-        padding-top: 157px;
-        padding-bottom: 30px;
+        padding: 0;
         min-width: 260px;
         gap: 12px;
     }
@@ -114,7 +123,7 @@
     .auth-form__link{
         font-size: 11px;
     }
-    
+
     .auth-form__button {
         min-width: unset;
         width: 100%;

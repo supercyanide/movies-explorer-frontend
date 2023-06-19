@@ -7,7 +7,9 @@ import './AuthForm.css';
 export default function AuthForm({ inputs, title, formName, buttonName, bottomText, bottomLink, linkTarget }) {
     return(
         <form className="auth-form" name={formName}>
-            <img alt='Лого' src={LogoPath} className='input__logo'/>
+            <Link className='auth-form__logo' to='/'>
+                <img alt="Movies Explorer" src={LogoPath}/>
+            </Link>
             <h1 className="auth-form__title">{title}</h1>
             <fieldset className="auth-form__inputs">
                 {inputs.map(({ caption, name, error, type, isValid, isReqired }, i) => 

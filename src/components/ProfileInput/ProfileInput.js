@@ -1,6 +1,6 @@
 import './ProfileInput.css';
 
-export default function ProfileInput({ caption, name, placeholder, value, onChange, isReqired}) {
+export default function ProfileInput({ caption, name, placeholder, value, onChange, isReqired, isDisabled}) {
 
     return (
     <label className='profile-input__label'>
@@ -11,7 +11,8 @@ export default function ProfileInput({ caption, name, placeholder, value, onChan
             className="profile-input__input"
             required={isReqired}
             value={value}
-            onChange={({ target }) => onChange(target.value)} 
+            onChange={({ target }) => onChange(target.value)}
+            disabled={isDisabled} 
         />
     </label>);
 

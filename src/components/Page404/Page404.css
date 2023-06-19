@@ -24,6 +24,13 @@
     margin: 5px 0 0 0;
     padding: 0;
 }
+.page404__info{
+    flex: 1 0 auto;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    justify-content: center;
+}
   
 .page404__link {
     color: #FF6838;
@@ -33,9 +40,9 @@
     margin: 0;
     padding: 0;
     border: 0;
-    background-color: white;
-    margin-top: 184px;
+    background-color: transparent;
     cursor: pointer;
+    flex: 0 0 auto;
 }
   
 .page404__link:hover {
@@ -44,8 +51,6 @@
   
 @media screen and (max-width: 480px) {
 .page404__link {
-    position: absolute;
-    bottom: 30px;
     font-size: 12px;
     line-height: 14.5px;
 }

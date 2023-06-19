@@ -14,7 +14,7 @@ export default function SearchForm(){
                 <input className='search-form__input' placeholder='Фильм'></input>
                 <button type='submit' className='search-form__submit-btn'></button>
             </div>
-            <div className='search-form__option'>
+            <div className='search-form__filter-checkbox'>
                 <FilterCheckbox checked={isChecked} onChange={handleChange} />
             </div>
         </form>
