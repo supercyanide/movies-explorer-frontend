@@ -30,10 +30,12 @@
     color: #FF6838;
     text-decoration: none;
     padding-left: 6px;
+    transition: opacity 0.3s ease;
 }
   
 .auth-form__link:hover {
     text-decoration: underline;
+    opacity: 0.6;
 }
   
 .auth-form__inputs {
@@ -78,6 +80,16 @@
 .auth-form__button:hover {
     opacity: 0.6;
 }
+
+.auth-form__button:disabled {
+    background-color: #F8F8F8;
+    color: #C2C2C2;
+}
+.auth-form__button:disabled:hover {
+    opacity: 100;
+    cursor: auto;
+}
+
 .auth-form__logo{
     height: 38px;
     width: 38px;

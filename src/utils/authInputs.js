@@ -2,13 +2,18 @@ export const registerInputs = [
     { 
         caption: "Имя", 
         name: "name",
-        isReqired: false,
+        type:'text',
+        isReqired: true,
+        min: 2,
+        max:20
     }, 
     { 
         caption: 'E-mail', 
         name: 'email', 
         type:'email',
         isReqired: true,
+        min: 2,
+        max:25
     }, 
     { 
         caption: 'Пароль', 
@@ -17,6 +22,8 @@ export const registerInputs = [
         type:'password', 
         isValid: false,
         isReqired: true,
+        min: 8,
+        max:25
     }
 ];
 export const loginInputs = [

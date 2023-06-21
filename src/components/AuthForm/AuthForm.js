@@ -12,7 +12,7 @@ export default function AuthForm({ inputs, title, formName, buttonName, bottomTe
             </Link>
             <h1 className="auth-form__title">{title}</h1>
             <fieldset className="auth-form__inputs">
-                {inputs.map(({ caption, name, error, type, isValid, isReqired }, i) => 
+                {inputs.map(({ caption, name, error, type, isValid, isReqired, min, max }, i) => 
                     <AuthFormInput 
                         key={i} 
                         label={caption} 
@@ -21,6 +21,8 @@ export default function AuthForm({ inputs, title, formName, buttonName, bottomTe
                         error={error} 
                         isValid={isValid} 
                         isReqired={isReqired}
+                        min={min}
+                        max={max}
                     />
                 )}
             </fieldset>

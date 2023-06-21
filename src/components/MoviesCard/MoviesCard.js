@@ -15,10 +15,10 @@ export default function MoviesCard({imageUrl, name, duration, trailerUrl, button
             </a>
             <div className='card__block'>
             <div className='card__info'>
-                <h3 className='card__title'>{name}</h3>
+                <h2 className='card__title'>{name}</h2>
                 <p className='card__duration'>{duration}</p>
             </div>
-            <button onClick={setLike} className={`card__button ${buttonClassName}`}></button>
+            <button type='button' onClick={setLike} className={`card__button ${buttonClassName}`}></button>
             </div>
         </li>
     )

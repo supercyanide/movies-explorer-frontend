@@ -35,7 +35,6 @@ function App() {
           <Route path='/movies' element={
             <>
               <Header isLogged={true}/>
-              <SearchForm/>
               <Movies/>
               <Footer/>
             </>
@@ -43,7 +42,6 @@ function App() {
           <Route path='/saved-movies' element={
             <>
               <Header isLogged={true}/>
-              <SearchForm/>
               <SavedMovies/>
               <Footer/>
             </>

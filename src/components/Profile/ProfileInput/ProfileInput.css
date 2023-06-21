@@ -2,19 +2,24 @@
   display: flex;
   gap: 10px;
   justify-content: space-between;
-  margin: 16px 10px 0;
+  padding: 0 10px 0;
   padding-bottom: 16px;
+  padding-top: 16px;
   width: 100%;
   font-size: 11px;
   font-weight: 500;
   line-height: 13px;
   border-bottom: 1px solid #E8E8E8;
+  flex-direction: row-reverse;
 }
 
 .profile-input__label:last-of-type {
   border-bottom: none;
 }
-
+.profile-input__caption{
+  color: black;
+  transition: all 0.3s ease;
+}
 .profile-input__input {
   border: 0;
   padding: 0;
@@ -22,12 +27,22 @@
   text-align: right;
   flex-grow: 1;
 }
+
 .profile-input__input:disabled{
   background-color: #FFFFFF;
   color: black;
 }
 
-
-.profile-input__input:focus {
-  outline: 0;
+.profile-input__input:focus ~ .profile-input__caption{
+  color: #FF6838;
 }
+
+.profile-input__input:focus{
+  background-color: transparent;
+  outline: none;
+}
+
+.profile-input__label:has(.profile-input__input:focus){
+  background-color: #f5f5f5;
+}
+

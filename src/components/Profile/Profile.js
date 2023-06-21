@@ -26,16 +26,16 @@ export default function Profile() {
         <main className='main'>
             <section className='profile'>
                 <form className="profile-form" name='profile' onSubmit={handleSubmit}>
-                    <h2 className="profile-form__title">Привет, {name}!</h2>
+                    <h1 className="profile-form__title">Привет, {name}!</h1>
                     <fieldset className="profile-form__inputs">
-                        <ProfileInput caption="Имя" name='name' placeholder='Введите имя' value={name} onChange={handleNameChange} isRequired={true} isDisabled={isDisabled}/>
-                        <ProfileInput caption="E-mail" name='email' placeholder='Введите адрес электронной почты' value={email} onChange={handleEmailChange} isRequired={true} isDisabled={isDisabled} />
+                        <ProfileInput caption="Имя" name='name' type='text' placeholder='Введите имя' value={name} onChange={handleNameChange} isDisabled={isDisabled}/>
+                        <ProfileInput caption="E-mail" name='email' type='email' placeholder='Введите адрес электронной почты' value={email} onChange={handleEmailChange} isDisabled={isDisabled} />
                     </fieldset>
                     <fieldset className="profile-form__buttons">
                         {isSubmitVisible ?
                             <div className="profile-form__submit-block">
                                 <span className="profile-form__error">При обновлении профиля произошла ошибка.</span>
-                                <button className="profile-form__submit-btn" disabled={true} onClick={toggleControlsVisibility}>Сохранить</button>
+                                <button type='submit' className="profile-form__submit-btn" disabled={false} onClick={toggleControlsVisibility}>Сохранить</button>
                             </div>
                         :
                             <div className="profile-form__control-block">
