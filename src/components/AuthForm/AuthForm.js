@@ -8,11 +8,11 @@ export default function AuthForm({ inputs, title, formName, buttonName, bottomTe
     return(
         <form className="auth-form" name={formName}>
             <Link className='auth-form__logo' to='/'>
-                <img alt="Movies Explorer" src={LogoPath}/>
+                <img alt="Поисковик фильмов" src={LogoPath}/>
             </Link>
             <h1 className="auth-form__title">{title}</h1>
             <fieldset className="auth-form__inputs">
-                {inputs.map(({ caption, name, error, type, isValid, isReqired, min, max }, i) => 
+                {inputs.map(({ caption, name, error, type, isValid, isReqired, min, max, placeholder }, i) => 
                     <AuthFormInput 
                         key={i} 
                         label={caption} 
@@ -23,6 +23,7 @@ export default function AuthForm({ inputs, title, formName, buttonName, bottomTe
                         isReqired={isReqired}
                         min={min}
                         max={max}
+                        placeholder={placeholder}
                     />
                 )}
             </fieldset>

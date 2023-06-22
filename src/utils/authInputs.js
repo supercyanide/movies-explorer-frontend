@@ -5,7 +5,7 @@ export const registerInputs = [
         type:'text',
         isReqired: true,
         min: 2,
-        max:20
+        max:20,
     }, 
     { 
         caption: 'E-mail', 
@@ -32,11 +32,18 @@ export const loginInputs = [
         name: 'email', 
         type:'email',
         isReqired: true,
+        min: 8,
+        max:25,
+        placeholder:'Введите Email'
     }, 
     { 
         caption: 'Пароль', 
         name: 'password', 
         type:'password',
         isReqired: true,
+        min: 8,
+        max:25,
+        placeholder:'Введите пароль'
+
     }
 ];

@@ -84,7 +84,7 @@
     }
 }
 
-/* @media screen and (max-width: 540px) {
+@media screen and (max-width: 540px) {
     .about-project {
         padding: 70px 18px;
     }
@@ -114,7 +114,7 @@
         font-size: 11px;
         line-height: 13px;
     }
-} */
+}
 @media screen and (max-width: 400px) {
     .about-project {
         padding: 70px 18px 70px;

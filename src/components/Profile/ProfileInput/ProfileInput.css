@@ -1,4 +1,4 @@
-.profile-input__label {
+.profile-input {
   display: flex;
   gap: 10px;
   justify-content: space-between;
@@ -13,7 +13,7 @@
   flex-direction: row-reverse;
 }
 
-.profile-input__label:last-of-type {
+.profile-input:last-of-type {
   border-bottom: none;
 }
 .profile-input__caption{
@@ -42,7 +42,7 @@
   outline: none;
 }
 
-.profile-input__label:has(.profile-input__input:focus){
+.profile-input:has(.profile-input__input:focus){
   background-color: #f5f5f5;
 }
 

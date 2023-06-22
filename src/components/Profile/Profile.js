@@ -1,9 +1,10 @@
 import './Profile.css';
 import ProfileInput from './ProfileInput/ProfileInput';
 import { useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 
 export default function Profile() {
+    const navigate = useNavigate();
 
     const [name, setName] = useState('Виталий');
     const [email, setEmail] = useState('example@ya.ru');
@@ -40,7 +41,7 @@ export default function Profile() {
                         :
                             <div className="profile-form__control-block">
                                 <button type="button" className="profile-form__control" onClick={toggleControlsVisibility}>Редактировать</button>
-                                <Link to='/' className="profile-form__control profile-form__control_signout">Выйти из аккаунта</Link>
+                                <button onClick={() => navigate('/')} type='button' className="profile-form__control profile-form__control_signout">Выйти из аккаунта</button>
                             </div>
                         }
                     </fieldset>

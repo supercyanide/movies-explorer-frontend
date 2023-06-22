@@ -1,9 +1,8 @@
 import React from 'react';
 import './Navigation.css';
 import { useState } from 'react';
-import { NavLink } from 'react-router-dom';
+import { NavLink, useNavigate } from 'react-router-dom';
 import Burger from '../Burger/Burger';
-import { useNavigate } from 'react-router-dom';
 
 export default function Navigation({isLogged}){
     const navigate = useNavigate();
@@ -25,8 +24,8 @@ export default function Navigation({isLogged}){
         <>
             <nav className="navigation navigation_logged">
                 <ul className='navigation__pages-links'>
-                    <NavLink className={toggleLinkActive} to="/movies">Фильмы</NavLink>
-                    <NavLink className={toggleLinkActive} to="/saved-movies">Сохраненные фильмы</NavLink>
+                    <li className='navigation__item'><NavLink className={toggleLinkActive} to="/movies">Фильмы</NavLink></li>
+                    <li className='navigation__item'><NavLink className={toggleLinkActive} to="/saved-movies">Сохраненные фильмы</NavLink></li>
                 </ul>
                 <NavLink className={toggleLinkActive} to="/profile">Аккаунт<span className='navigation__profile-icon'></span></NavLink>
                 <button className="navigation__menu" onClick={toggleBurger} type="button"></button>

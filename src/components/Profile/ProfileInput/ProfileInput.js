@@ -3,7 +3,7 @@ import './ProfileInput.css';
 export default function ProfileInput({ caption, placeholder, name, type, value, onChange, isDisabled}) {
 
     return (
-        <label className='profile-input__label'>
+        <label className='profile-input'>
             <input
                 placeholder={placeholder}
                 name={name}
