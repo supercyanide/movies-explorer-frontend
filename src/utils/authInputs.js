@@ -13,7 +13,7 @@ export const registerInputs = [
         type:'email',
         isReqired: true,
         min: 2,
-        max:25
+        max:40
     }, 
     { 
         caption: 'Пароль', 
@@ -33,7 +33,7 @@ export const loginInputs = [
         type:'email',
         isReqired: true,
         min: 8,
-        max:25,
+        max:40,
         placeholder:'Введите Email'
     }, 
     { 

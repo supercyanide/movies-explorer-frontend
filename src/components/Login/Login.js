@@ -1,7 +1,30 @@
 import AuthForm from '../AuthForm/AuthForm'
 import {loginInputs as inputs} from '../../utils/authInputs';
+import { useState } from 'react';
 
-export default function Login() {
+export default function Login({ handleLogin }) {
+    const [formValue, setFormValue] = useState({
+        email: '',
+        password: ''
+    })
+
+    const handleChange = (e) => {
+        const { name, value } = e.target;
+
+        setFormValue({
+            ...formValue,
+            [name]: value
+        });
+    }
+
+    const handleSubmit = (e) => {
+        e.preventDefault();
+        if (!formValue.email || !formValue.password) {
+            return;
+        }
+        handleLogin(formValue.email, formValue.password)
+    }
+
     return (
         <main className='main'>
             <section className='login'>
@@ -13,6 +36,8 @@ export default function Login() {
                     bottomText="Ещё не зарегистрированы?"
                     bottomLink="Регистрация"
                     linkTarget="/signup" 
+                    onSubmit={handleSubmit}
+                    onChange={handleChange}
                 />
             </section>
         </main>

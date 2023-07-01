@@ -1,6 +1,6 @@
 import './AuthFormInput.css';
 
-export default function AuthFormInput({ label, name, error, type, isValid = true, isReqired, min, max, placeholder}) {
+export default function AuthFormInput({ label, name, error, type, isValid = true, isReqired, min, max, placeholder, onChange}) {
     return (
         <label className="input-block">{label}
             <input 
@@ -11,6 +11,7 @@ export default function AuthFormInput({ label, name, error, type, isValid = true
                 minLength={min} 
                 maxLength={max}
                 placeholder={placeholder}
+                onChange={onChange}
 
             />
             <span className="input-block__error">{error}</span>

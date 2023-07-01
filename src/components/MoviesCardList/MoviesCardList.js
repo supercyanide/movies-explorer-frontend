@@ -2,28 +2,34 @@ import './MoviesCardList.css';
 import LoadMoreButton from '../LoadMoreButton/LoadMoreButton';
 
 import MoviesCard from '../MoviesCard/MoviesCard.js';
+import { useEffect, useState } from 'react';
 
-export default function MoviesCardList({ InitialMovies = [], buttonClassName, isMoreButton}){
+export default function MoviesCardList({ movies, buttonClassName, isMoreButton, onButtonClick}){
+
+    const savedMovies = JSON.parse(localStorage.getItem('savedMovies'));
+
     return(
         <section className='movies'>
-            {InitialMovies.length === 0 ? <h2 className="movies-card-list__title">Фильмов не найдено</h2>
+            {
+            ( movies === null)
+            ? 
+            <h2 className="movies-card-list__title">Фильмов не найдено</h2>
             :
             <ul className={`movies-card-list ${isMoreButton ? '' : 'movies-card-list_saved'}`}>
-                {
-                    InitialMovies.map((movie, i) => (
+                {   
+                    movies.map((movie, i) => (
                         <MoviesCard
+                            movie={movie}
                             key={i}
-                            imageUrl={movie.cover}
-                            name={movie.name}
-                            duration={movie.duration}
-                            trailerUrl={movie.trailerUrl}
                             buttonClassName={buttonClassName}
+                            onButtonClick={onButtonClick}
+                            savedMovie={savedMovies? savedMovies.find(m => m.movieId === movie.movieId) : {}}
                         />
                     ))
                 }
             </ul>
             }
-            {isMoreButton && InitialMovies.length>0 ? <LoadMoreButton/> : ''}
+            {/* {isMoreButton && movies.length>0 ? <LoadMoreButton/> : ''} */}
         </section>
     )
 }

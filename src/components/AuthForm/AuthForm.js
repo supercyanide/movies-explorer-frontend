@@ -1,12 +1,18 @@
 
 import LogoPath from '../../images/logo.svg';
 import { Link } from 'react-router-dom';
+import { useState } from 'react';
 import AuthFormInput from './AuthFormInput/AuthFormInput';
 import './AuthForm.css';
 
-export default function AuthForm({ inputs, title, formName, buttonName, bottomText, bottomLink, linkTarget }) {
+export default function AuthForm({ inputs, title, formName, buttonName, bottomText, bottomLink, linkTarget, onSubmit, onChange}) {
+
+    const [errorText, setErrorText] = useState('');
+    const [isDisabled, setDisabled] = useState(false);
+
+
     return(
-        <form className="auth-form" name={formName}>
+        <form className="auth-form" name={formName} onSubmit={onSubmit}>
             <Link className='auth-form__logo' to='/'>
                 <img alt="Поисковик фильмов" src={LogoPath}/>
             </Link>
@@ -24,6 +30,7 @@ export default function AuthForm({ inputs, title, formName, buttonName, bottomTe
                         min={min}
                         max={max}
                         placeholder={placeholder}
+                        onChange={onChange}
                     />
                 )}
             </fieldset>
