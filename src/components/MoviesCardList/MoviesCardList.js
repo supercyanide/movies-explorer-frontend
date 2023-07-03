@@ -34,7 +34,7 @@ export default function MoviesCardList({ movies, buttonClassName, isMoreButton, 
             ? 
             <h2 className="movies-card-list__title">Фильмов не найдено</h2>
             :
-            <ul className={`movies-card-list ${isMoreButton ? '' : 'movies-card-list_saved'}`}>
+            <ul className={`movies-card-list ${location.pathname ==='/saved-movies' ? '' : 'movies-card-list_saved'}`}>
                 {   
                     movies.slice(0, endRange).map((movie, i) => (
                         <MoviesCard
@@ -48,16 +48,14 @@ export default function MoviesCardList({ movies, buttonClassName, isMoreButton, 
                 }
             </ul>
             }
-            {isMoreButton && movies && movies.length> 0 
+            {location.pathname ==='/saved-movies' && movies && movies.length> 0 
                 ? <LoadMoreButton 
                     className={movies.length <= endRange ? 'load-more-btn load-more-btn_hiden': 'load-more-btn'}
                     onClick={() => {
                         setEndRange(endRange + offset)
                     }} 
                 /> 
-                : (location.pathname ==='/movies') 
-                    ? <h2 className="movies-card-list__title">Фильмов не найдено</h2>  
-                    :''
+                : ""
             }
         </section>
     )
