@@ -21,8 +21,8 @@ export default function SavedMovies({ onRemove, savedMovies, setSavedMovies }){
     },[location.pathname])
     
     function filter(value,checked){
-        
-        if (value & checked) {
+        console.log(checked)
+        if (value && checked) {
           return savedMovies.filter((item) =>
             ((((item.nameEN).toLowerCase()).includes(value.toLowerCase())||((item.nameRU).toLowerCase()).includes(value.toLowerCase())) && item.duration <=40)
           )

@@ -33,11 +33,10 @@ export default function SearchForm({handleSearch, handleCheckboxSearch, onChange
             setIsChecked(1);
             localStorage.setItem('lastCheckboxValue', 1)
         };
-        handleCheckboxSearch(newState);
         if (location.pathname === '/saved-movies'){
             setIsSavedChecked(newState);
-            handleCheckboxSearch(newState);
         }
+        handleCheckboxSearch(newState);
     }
 
     return(
