@@ -26,9 +26,13 @@ export default function MoviesCardList({ movies, buttonClassName, isMoreButton, 
     const location = useLocation();
 
     const [endRange, setEndRange] = useState(defaultWidth);
-
+    
     return(
         <section className='movies'>
+            {location.pathname ==='/saved-movies' && (movies =[])
+            ? <h2 className="movies-card-list__title">Фильмов не найдено</h2>
+            :""
+            }
             {
             ( movies === null)
             ? 
@@ -48,7 +52,7 @@ export default function MoviesCardList({ movies, buttonClassName, isMoreButton, 
                 }
             </ul>
             }
-            {location.pathname ==='/saved-movies' && movies && movies.length> 0 
+            {location.pathname ==='/movies' && movies && movies.length> 0 
                 ? <LoadMoreButton 
                     className={movies.length <= endRange ? 'load-more-btn load-more-btn_hiden': 'load-more-btn'}
                     onClick={() => {
@@ -57,6 +61,7 @@ export default function MoviesCardList({ movies, buttonClassName, isMoreButton, 
                 /> 
                 : ""
             }
+            
         </section>
     )
 }
