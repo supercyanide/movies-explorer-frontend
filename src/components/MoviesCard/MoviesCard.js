@@ -1,24 +1,8 @@
 import './MoviesCard.css';
-import React, { useEffect } from 'react';
+import React from 'react';
 import { useLocation } from 'react-router-dom';
-import { useContext } from 'react';
-import { CurrentUserContext } from '../../contexts/currentUserContext';
-
 
 export default function MoviesCard({movie, buttonClassName, onButtonClick, savedMovie }){
-    console.log(savedMovie)
-    const currentUser = useContext(CurrentUserContext);
-    
-    let isLiked;
-    if(savedMovie){
-        if (savedMovie.owner._id === currentUser._id){
-            isLiked= true;
-        }
-        else {
-            isLiked = false
-        }
-    }
-
     const location = useLocation();
 
     function handleClickLike(evt){
@@ -51,7 +35,7 @@ export default function MoviesCard({movie, buttonClassName, onButtonClick, saved
                     </div>
                     <button type='button' onClick={location.pathname === '/movies'? handleClickLike: handleClickRemove} 
                     className={`card__button
-                    ${location.pathname === '/movies' && isLiked? "card__like-button_active": ""}
+                    ${location.pathname === '/movies' && savedMovie ? "card__like-button_active": ""}
                     ${location.pathname === '/movies' ? "card__like-button" : "card__remove-button"}
                     `}></button>
                 </div>

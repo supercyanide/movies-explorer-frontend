@@ -31,7 +31,7 @@ function App() {
   
   const [currentUser, setCurrentUser] = useState({});
   
-  const [savedMovies, setSavedMovies] = useState([]);
+  const [savedMovies, setSavedMovies] = useState(JSON.parse(localStorage.getItem('savedMovies'))||[]);
   const [isError, setIsError] = useState(false);
   const [isPopupOpened, setIsPopupOpened] = useState(false);
   const [popupMessage, setPopupMessage] = useState("");
@@ -72,7 +72,7 @@ function App() {
   }, [loggedIn]);
 
   useEffect(()=>{
-    if (savedMovies.length) {
+    if (savedMovies && savedMovies.length) {
       localStorage.setItem("savedMovies", JSON.stringify(savedMovies));
     }
     else localStorage.setItem("savedMovies",null);
@@ -194,8 +194,8 @@ function App() {
       .catch((err) => {
         console.log(err)}
       );
-
   };
+
   return (
     <div className='page'>
       <CurrentUserContext.Provider value={currentUser}>
@@ -230,8 +230,12 @@ function App() {
               <Route path='/saved-movies' element={
                 <>
                   <Header isLogged={loggedIn}/>
-                  <ProtectedRouteElement element={SavedMovies} loggedIn={loggedIn}
+                  <ProtectedRouteElement 
+                    element={SavedMovies} 
+                    loggedIn={loggedIn}
                     onRemove={handleSavedMoviesButton}
+                    savedMovies={savedMovies} 
+                    setSavedMovies={setSavedMovies}
                   />
                   <Footer/>
                 </>

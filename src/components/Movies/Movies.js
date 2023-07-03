@@ -43,6 +43,7 @@ export default function Movies({onButtonClick, allMovies, savedMovies}){
             {isPreloaderActive 
                 ? <Preloader/> 
                 : <MoviesCardList
+                    savedMovies={savedMovies}
                     movies={sortedMovies??localMovies}
                     buttonClassName='card__like-button'
                     isMoreButton={true}

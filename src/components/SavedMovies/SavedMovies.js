@@ -6,8 +6,9 @@ import SearchForm from '../SearchForm/SearchForm';
 import { useLocation } from 'react-router-dom';
 
 
-export default function SavedMovies({ onRemove }){
-    const [savedMovies, setSavedMovies] = useState(JSON.parse(localStorage.getItem('savedMovies')))
+export default function SavedMovies({ onRemove, savedMovies, setSavedMovies }){
+    // const [savedMovies, setSavedMovies] = useState(JSON.parse(localStorage.getItem('savedMovies')))
+    const [searchValue, setSearchValue] = useState('');
     const [sortedMovies,setSortedMovies] = useState(savedMovies);
     const [lastSearchValue, setLastSearchValue] = useState('');
 
@@ -20,13 +21,13 @@ export default function SavedMovies({ onRemove }){
     },[location.pathname])
     
     function filter(value,checked){
-        console.log(value.toLowerCase())
-        if (checked) {
+        
+        if (value & checked) {
           return savedMovies.filter((item) =>
-            ((((item.nameEN).toLowerCase()).includes(value.toLowerCase())||((item.nameRU).toLowerCase()).includes(value.toLowerCase())) && item.duration <=30)
+            ((((item.nameEN).toLowerCase()).includes(value.toLowerCase())||((item.nameRU).toLowerCase()).includes(value.toLowerCase())) && item.duration <=40)
           )
         }
-        else {
+        else if(!checked) {
             return (
                 savedMovies.filter((item) => (((item.nameEN).toLowerCase()).includes(value.toLowerCase()))||(((item.nameRU).toLowerCase()).includes(value.toLowerCase())))
             )
@@ -40,10 +41,12 @@ export default function SavedMovies({ onRemove }){
             setSortedMovies(sortedMovieSearch);
         }
     }
+
     function handleCheckboxSearch(checkboxValue){
-        if (lastSearchValue||savedMovies){
-            const sortedMovieSearch = filter(lastSearchValue||savedMovies,checkboxValue);
-            setSortedMovies(sortedMovieSearch);
+        if (lastSearchValue){
+            const sortedMovieSearch = filter(lastSearchValue, checkboxValue);
+            if (sortedMovieSearch) setSortedMovies(sortedMovieSearch)
+            
         }
         else return
         
@@ -53,12 +56,14 @@ export default function SavedMovies({ onRemove }){
         onRemove(movie);
         setSortedMovies(sortedMovies.filter((item) =>item.movieId!==movie.movieId))
     }
+
     
     return(
         <main className='saved-page'>
             <SearchForm
                 handleSearch={handleSavedSearch}
                 handleCheckboxSearch={handleCheckboxSearch}
+                // onChange={handleChange}
 
             />
             <MoviesCardList

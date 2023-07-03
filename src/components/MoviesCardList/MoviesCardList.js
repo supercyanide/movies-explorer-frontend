@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import { useLocation } from 'react-router-dom';
 
 import './MoviesCardList.css';
@@ -9,12 +9,11 @@ import MoviesCard from '../MoviesCard/MoviesCard.js';
 import useDimensions from '../../hooks/useDimentions';
 
 
-export default function MoviesCardList({ movies, buttonClassName, isMoreButton, onButtonClick}){
+export default function MoviesCardList({ movies, buttonClassName, isMoreButton, onButtonClick, savedMovies}){
     const { width } = useDimensions();
-    const savedMovies = JSON.parse(localStorage.getItem('savedMovies'));
 
-    let defaultWidth;
-    let offset;
+    let defaultWidth = 5;
+    let offset = 1;
 
     if (width >= 1280 ) {
         defaultWidth = 12;
@@ -22,14 +21,12 @@ export default function MoviesCardList({ movies, buttonClassName, isMoreButton, 
     } else if (width >= 768) {
         defaultWidth = 8;
         offset = 2;
-    } else if (width <= 480) {
-        defaultWidth = 5;
-        offset = 1;
     }
+
     const location = useLocation();
 
     const [endRange, setEndRange] = useState(defaultWidth);
-    
+
     return(
         <section className='movies'>
             {
