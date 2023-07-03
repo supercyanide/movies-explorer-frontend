@@ -1,6 +1,5 @@
 import { MOVIE_URL } from './consts';
 
-// Меняет формат данных объекта movie чтобы они были единообразными (решение проблемы совместимости полученных данных и данных сохраняемых на бэкэ)
 const convertMovieData = (movie) => {
   const convertedMovie = {
     country: movie.country,
@@ -14,7 +13,6 @@ const convertMovieData = (movie) => {
     nameEN: movie.nameEN,
     thumbnail: `${MOVIE_URL}${movie.image.url}`,
     movieId: `${movie.id}`,
-    saved: false,
   }
 
   return convertedMovie;

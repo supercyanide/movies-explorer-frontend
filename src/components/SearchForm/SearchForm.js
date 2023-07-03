@@ -3,36 +3,37 @@ import FilterCheckbox from '../FilterCheckbox/FilterCheckbox';
 import { useState, useEffect } from 'react';
 import { useLocation } from 'react-router-dom';
 
-export default function SearchForm({handleSearch}){
+export default function SearchForm({handleSearch, handleCheckboxSearch}){
     const localValue = localStorage.getItem('lastSearchValue')
     const localCheckboxValue = localStorage.getItem('lastCheckboxValue')
+
     const [value, setValue] = useState(localValue ?? '')
     const [isChecked, setIsChecked] = useState(localCheckboxValue ?? 0)
 
     const location = useLocation()
     
-    function handleChange({ target: { checked: newState } }) {
-        if (newState===false){
-            setIsChecked(0);
-        }
-        if (newState===true) {
-            setIsChecked(1);
-        };
-    }
+    
 
     function handleSubmitSearch(evt){
         evt.preventDefault();
-        console.log(isChecked)
+        if (location.pathname === '/movies') {
+            localStorage.setItem('lastSearchValue', value)
+            localStorage.setItem('lastCheckboxValue', isChecked)
+        }
         handleSearch({value,isChecked});
     }
 
-    useEffect(() => {
-        if (location.pathname === '/movies') {
-          localStorage.setItem('lastSearchValue', value)
-          localStorage.setItem('lastCheckboxValue', isChecked)
+    function handleChange({ target: { checked: newState } } ) {
+        if (newState===false & location.pathname === '/movies'){
+            setIsChecked(0);
+            localStorage.setItem('lastCheckboxValue', 0)
         }
-      }, [value, isChecked])
-    
+        if (newState===true & location.pathname === '/movies') {
+            setIsChecked(1);
+            localStorage.setItem('lastCheckboxValue', 1)
+        };
+        handleCheckboxSearch(newState);
+    }
 
     return(
         <section>

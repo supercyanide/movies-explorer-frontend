@@ -1,4 +1,3 @@
-import { useEffect, useState } from 'react';
 import './FilterCheckbox.css';
 
 export default function FilterCheckbox({ checked , onChange }) {

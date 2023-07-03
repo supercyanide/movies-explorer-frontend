@@ -22,7 +22,7 @@ export const signup = ({ name, password, email }) => {
   })
 };
 
-export const signin = (email, password) => {
+export const signin = ({email, password}) => {
   return request(`signin`, {
     method: 'POST',
     headers: {

@@ -1,10 +1,11 @@
 import './App.css';
 import React from 'react';
 import { useState, useEffect } from 'react';
-import { Route, Routes, useLocation, useNavigate, } from 'react-router-dom';
+import { Route, Routes, json, useLocation, useNavigate, } from 'react-router-dom';
 import { CurrentUserContext } from '../../contexts/currentUserContext';
-import { MoviesDataContext } from '../../contexts/moviesDataContext';
 import { useRef } from 'react';
+import errors from '../../utils/errors';
+import ProtectedRouteElement from '../ProtectedRoute';
 
 import Header from '../Header/Header';
 import Movies from '../Movies/Movies';
@@ -15,7 +16,7 @@ import SavedMovies from '../SavedMovies/SavedMovies';
 import Register from '../Register/Register';
 import Login from '../Login/Login';
 import Page404 from '../Page404/Page404';
-import ErrorPopup from '../ErrorPopup/ErrorPopup';
+import Popup from '../Popup/Popup';
 
 import * as auth from '../../utils/auth'
 import  moviesApi  from '../../utils/MoviesApi';
@@ -23,26 +24,35 @@ import { convertMovieData } from '../../utils/convertMovieData';
 import api from '../../utils/Api';
 
 function App() {
-  const navigate = useNavigate();
-
-  const [currentUser, setCurrentUser] = useState({});
-  const [loggedIn, setLoggedIn] = useState(false);
-
   const token = localStorage.getItem('token');
-
-  const [savedMovies, setSavedMovies] = useState([]);
-  const [isErrorPopup, setErrorPopup] = useState(false);
-  const [errorMesage, setErrorMessage] = useState("");
-
-  const closeErrorPopup = () => setErrorPopup(false);
+  const navigate = useNavigate();
   
-  useEffect(()=>{
-    if (savedMovies.length) {
-      localStorage.setItem("savedMovies", JSON.stringify(savedMovies));
-    }
-  },[savedMovies,])
+  const [loggedIn, setLoggedIn] = useState(JSON.parse(localStorage.getItem('loggedIn'))||false);
+  
+  const [currentUser, setCurrentUser] = useState({});
+  
+  const [savedMovies, setSavedMovies] = useState([]);
+  const [isError, setIsError] = useState(false);
+  const [isPopupOpened, setIsPopupOpened] = useState(false);
+  const [popupMessage, setPopupMessage] = useState("");
 
-  React.useEffect(() => {
+  useEffect(() => {
+    if (token) {
+      auth.checkToken(token)
+      .then((res) => {
+        if (res) {
+          setLoggedIn(true);
+          localStorage.setItem('loggedIn', true);
+          setCurrentUser(res);
+        }
+      })
+      .catch(err => {
+        console.log(err);
+      });
+    }
+  }, [token])
+
+  useEffect(() => {
     if (loggedIn) {
       getAllMovies();
       api
@@ -53,39 +63,34 @@ function App() {
         .getUserInfo()
         .then((user) => {
           setCurrentUser(user);
+          setLoggedIn(true)
+          localStorage.setItem('loggedIn', true)
+
         })
         .catch(console.log);
-      
     }
   }, [loggedIn]);
 
-  useEffect(() => {
-    if (token) {
-      auth.checkToken(token)
-      .then((res) => {
-        if (res) {
-          setLoggedIn(true);
-          setCurrentUser(res);
-        }
-      })
-      .catch(err => {
-        console.log(err);
-      });
+  useEffect(()=>{
+    if (savedMovies.length) {
+      localStorage.setItem("savedMovies", JSON.stringify(savedMovies));
     }
+    else localStorage.setItem("savedMovies",null);
+  },[savedMovies,])
 
-  }, [token])
+  const closePopup = () => setIsPopupOpened(false);
 
-  
-
-  function handleLogin(email, password) {
-    auth.signin(email, password)
+  function handleLogin(formValue) {
+    auth.signin(formValue)
       .then(() => {
         setLoggedIn(true);
+        localStorage.setItem('loggedIn', true);
         navigate('/');
       })
       .catch(err => {
-        setErrorMessage(err);
-        setErrorPopup(true);
+        setIsError(true);
+        setPopupMessage(err);
+        setIsPopupOpened(true);
         console.log(err);
       })
   }
@@ -93,11 +98,15 @@ function App() {
   function handleRegister(formValue) {
     auth.signup(formValue)
       .then(() => {
-        navigate('/signin', { replace: true });
+        handleLogin(formValue)
+        setIsError(false)
+        setPopupMessage("Регистрация прошла успешно")
+        setIsPopupOpened(true)
       })
       .catch((err) => {
-        setErrorMessage(err);
-        setErrorPopup(true);
+        setIsError(true)
+        setPopupMessage(identifyError(err));
+        setIsPopupOpened(true);
         console.log(err);
       })
   }
@@ -106,17 +115,27 @@ function App() {
     localStorage.removeItem('token');
     setCurrentUser({});
     setLoggedIn(false);
+    localStorage.setItem('loggedIn', false)
     navigate('/signin');
   }
 
   function handleUpdateUser ({ name, email }) {
     api.editUserInfo({name, email})
       .then((result) => {
-        setCurrentUser(result.data)
+        setCurrentUser(result.data);
+        setIsError(false);
+        setPopupMessage('Данные успешно сохранены');
+        setIsPopupOpened(true);
       })
       .catch((err) => {
-        console.log(err)
+        console.log(err);
+        setPopupMessage(err);
+        setIsPopupOpened(true);
       })
+  }
+
+  function identifyError(code){
+    return (code + ' '+ errors[code])
   }
 
   function removeFromSaved(id) {
@@ -133,7 +152,6 @@ function App() {
     const data = {
       ...movie
     };
-    delete data.saved;
     api
       .postMovie(data)
       .then((movie) => {
@@ -154,7 +172,6 @@ function App() {
     removeFromSaved(movie._id);
   }
 
-  // Извлекаю базу фильмов из LocalStorage, проверяю на длинну и возращую значение для обновления стейта movies
   const extractAllMoviesLocal = () => {
     let allMoviesLocal = JSON.parse(localStorage.getItem("allMovies"));
     if (!allMoviesLocal) {
@@ -169,6 +186,7 @@ function App() {
   const getAllMovies = () => {
     moviesApi.getMovies()
       .then((res) => {
+        console.log()
         let moviesList = res.map((item) => convertMovieData(item)); // форматирование полей
         localStorage.setItem("allMovies", JSON.stringify(moviesList));
         setAllMovies(moviesList);
@@ -181,8 +199,15 @@ function App() {
   return (
     <div className='page'>
       <CurrentUserContext.Provider value={currentUser}>
-        <ErrorPopup titleText="Ошибка" popupText={errorMesage} submitText="ОК" onClose={closeErrorPopup} isOpen={isErrorPopup} />
+        <Popup titleText={isError?'Ошибка':'Успешно'} popupText={popupMessage} submitText="ОК" onClose={closePopup} isError={isError} isOpen={isPopupOpened} />
           <Routes>
+            {/* незащищенные роуты */}
+            <Route path='/signup' element={
+              <Register handleRegister={handleRegister}/>
+            }/>
+            <Route path='/signin' element={
+              <Login handleLogin={handleLogin}/>
+            }/>
             <Route exact path='/' element={
               <>
                 <Header isLogged={loggedIn}/>
@@ -190,22 +215,23 @@ function App() {
                 <Footer/>
               </>
             }/>
+            {/* защищенные роуты */}
               <Route path='/movies' element={
                 <>
                   <Header isLogged={loggedIn}/>
-                  <Movies
+                  <ProtectedRouteElement element={Movies} loggedIn={loggedIn}
                     allMovies={allMovies}
                     onButtonClick={handleMoviesButton}
                     savedMovies={savedMovies}
-                    />
+                  />
                   <Footer/>
                 </>
               }/>
               <Route path='/saved-movies' element={
                 <>
                   <Header isLogged={loggedIn}/>
-                  <SavedMovies
-                  onRemove={handleSavedMoviesButton}
+                  <ProtectedRouteElement element={SavedMovies} loggedIn={loggedIn}
+                    onRemove={handleSavedMoviesButton}
                   />
                   <Footer/>
                 </>
@@ -213,15 +239,12 @@ function App() {
             <Route exact path='/profile' element={
               <>
                 <Header isLogged={loggedIn}/>
-                <Profile onSignout={signOut} onUpdate={handleUpdateUser} />
+                <ProtectedRouteElement element={Profile} loggedIn={loggedIn} 
+                  onSignout={signOut} 
+                  onUpdate={handleUpdateUser} />
               </>
             }/>
-            <Route path='/signup' element={
-              <Register handleRegister={handleRegister}/>
-            }/>
-            <Route path='/signin' element={
-              <Login handleLogin={handleLogin}/>
-            }/>
+            {/* роут 404 */}
             <Route path='*' element={
               <Page404/>
             }/>

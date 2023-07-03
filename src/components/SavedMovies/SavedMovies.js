@@ -6,9 +6,10 @@ import SearchForm from '../SearchForm/SearchForm';
 import { useLocation } from 'react-router-dom';
 
 
-export default function SavedMovies({onRemove}){
+export default function SavedMovies({ onRemove }){
     const [savedMovies, setSavedMovies] = useState(JSON.parse(localStorage.getItem('savedMovies')))
     const [sortedMovies,setSortedMovies] = useState(savedMovies);
+    const [lastSearchValue, setLastSearchValue] = useState('');
 
     const location = useLocation();
     
@@ -19,23 +20,33 @@ export default function SavedMovies({onRemove}){
     },[location.pathname])
     
     function filter(value,checked){
+        console.log(value.toLowerCase())
         if (checked) {
           return savedMovies.filter((item) =>
-            (((item.nameEN).toLowerCase().includes(value.toLowerCase())||(item.nameRU).toLowerCase().includes(value.toLowerCase())) && item.duration <=30)
+            ((((item.nameEN).toLowerCase()).includes(value.toLowerCase())||((item.nameRU).toLowerCase()).includes(value.toLowerCase())) && item.duration <=30)
           )
         }
         else {
             return (
-                savedMovies.filter((item) => (item.nameEN).toLowerCase().includes(value.toLowerCase())||(item.nameRU).toLowerCase().includes(value.toLowerCase()))
+                savedMovies.filter((item) => (((item.nameEN).toLowerCase()).includes(value.toLowerCase()))||(((item.nameRU).toLowerCase()).includes(value.toLowerCase())))
             )
         }
     }
 
     function handleSavedSearch({value, isChecked}){
-        if(Object.values(savedMovies).length){
+        setLastSearchValue(value);
+        if(savedMovies){
             const sortedMovieSearch = filter(value, parseInt(isChecked));
             setSortedMovies(sortedMovieSearch);
         }
+    }
+    function handleCheckboxSearch(checkboxValue){
+        if (lastSearchValue||savedMovies){
+            const sortedMovieSearch = filter(lastSearchValue||savedMovies,checkboxValue);
+            setSortedMovies(sortedMovieSearch);
+        }
+        else return
+        
     }
 
     function handleRemove(movie){
@@ -47,6 +58,7 @@ export default function SavedMovies({onRemove}){
         <main className='saved-page'>
             <SearchForm
                 handleSearch={handleSavedSearch}
+                handleCheckboxSearch={handleCheckboxSearch}
 
             />
             <MoviesCardList

@@ -1,7 +1,9 @@
-import './ErrorPopup.css';
-import popupImagePath from '../../images/error.svg'
+import './Popup.css';
+import popupErrorImagePath from '../../images/error.svg'
+import popupSuccessImagePath from '../../images/success.svg'
 
-export default function ErrorPopup({ isOpen, titleText, popupText, submitText, onClose }) {
+
+export default function Popup({ isOpen, titleText, popupText, submitText, onClose, isError }) {
 
     function handleSubmit() {
         onClose && onClose();
@@ -11,7 +13,7 @@ export default function ErrorPopup({ isOpen, titleText, popupText, submitText, o
         <div className={`popup ${isOpen ? 'popup_opened' : ''}`}>
             <div className="popup__container">
                 <h3 className="popup__title">{titleText}</h3>
-                <img src={popupImagePath} alt='Ошибка' className='popup__image'/>
+                <img src={isError? popupErrorImagePath: popupSuccessImagePath } alt='Ошибка' className='popup__image'/>
                 <p className="popup__text">{popupText}</p>
                 <button type="button" onClick={handleSubmit} className="popup__submit">{submitText}</button>
                 <button type="button" onClick={handleSubmit} className="popup__close"></button>

@@ -1,21 +1,35 @@
 import './MoviesCard.css';
-import React from 'react';
+import React, { useEffect } from 'react';
 import { useLocation } from 'react-router-dom';
+import { useContext } from 'react';
+import { CurrentUserContext } from '../../contexts/currentUserContext';
 
 
 export default function MoviesCard({movie, buttonClassName, onButtonClick, savedMovie }){
-
+    console.log(savedMovie)
+    const currentUser = useContext(CurrentUserContext);
+    
+    let isLiked;
+    if(savedMovie){
+        if (savedMovie.owner._id === currentUser._id){
+            isLiked= true;
+        }
+        else {
+            isLiked = false
+        }
+    }
 
     const location = useLocation();
 
-
-    function handleClick(evt){
+    function handleClickLike(evt){
         evt.preventDefault()
         let btn = evt.target;
-        if (location.pathname === '/movies'){
-            btn.classList.toggle('card__like-button_active')
-            console.log(btn)
-        }
+        onButtonClick(movie);
+        btn.classList.toggle('card__like-button_active') 
+        
+    }
+    function handleClickRemove(evt){
+        evt.preventDefault();
         onButtonClick(movie);
     }
 
@@ -35,7 +49,11 @@ export default function MoviesCard({movie, buttonClassName, onButtonClick, saved
                         <h2 className='card__title'>{movie.nameRU}</h2>
                         <p className='card__duration'>{formatDuration(movie.duration)}</p>
                     </div>
-                    <button type='button' onClick={handleClick} className={`card__button ${(location.pathname === "/movies" ? (savedMovie ? "card__like-button_active" : "card__like-button") : "card__remove-button" )}`}></button>
+                    <button type='button' onClick={location.pathname === '/movies'? handleClickLike: handleClickRemove} 
+                    className={`card__button
+                    ${location.pathname === '/movies' && isLiked? "card__like-button_active": ""}
+                    ${location.pathname === '/movies' ? "card__like-button" : "card__remove-button"}
+                    `}></button>
                 </div>
             </li>
         )

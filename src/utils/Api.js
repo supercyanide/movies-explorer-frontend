@@ -54,6 +54,7 @@ export class Api {
 
     postMovie(body) {
         return this._post('/movies','POST', body)
+
     };
 
     deleteMovie(id) {

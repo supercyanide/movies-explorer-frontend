@@ -20,8 +20,7 @@ export default function Movies({onButtonClick, allMovies, savedMovies}){
         else return allMovies.filter((item) => (item.nameEN).toLowerCase().includes(value)||(item.nameRU).toLowerCase().includes(value))
     }
 
-    function handleSearch(){
-        
+    function handleSearch(evt){
         const value = localStorage.getItem('lastSearchValue');
         const isChecked = localStorage.getItem('lastCheckboxValue');
         const sortedMovieSearch = filter(value, parseInt(isChecked));
@@ -29,20 +28,27 @@ export default function Movies({onButtonClick, allMovies, savedMovies}){
         setSortedMovies(sortedMovieSearch);
         setIsPreloaderActive(false);
     }
+    function handleCheckboxSearch(checkboxValue){
+        const value = localStorage.getItem('lastSearchValue');
+        const sortedMovieSearch = filter(value,checkboxValue);
+        localStorage.setItem('filtered', JSON.stringify(sortedMovieSearch));
+        setSortedMovies(sortedMovieSearch);
+        setIsPreloaderActive(false);
+
+    }
 
     return(
         <main className='movies-page'>
-            <SearchForm
-            handleSearch={handleSearch}
-            />
-            {isPreloaderActive ? <Preloader/> 
-            :
-            <MoviesCardList
-                movies={sortedMovies??localMovies}
-                buttonClassName='card__like-button'
-                isMoreButton={true}
-                onButtonClick={onButtonClick}
-            />
+            <SearchForm handleSearch={handleSearch} handleCheckboxSearch={handleCheckboxSearch}/>
+            {isPreloaderActive 
+                ? <Preloader/> 
+                : <MoviesCardList
+                    movies={sortedMovies??localMovies}
+                    buttonClassName='card__like-button'
+                    isMoreButton={true}
+                    onButtonClick={onButtonClick}
+
+                />
             }
         </main>
         

@@ -3,26 +3,9 @@ import {loginInputs as inputs} from '../../utils/authInputs';
 import { useState } from 'react';
 
 export default function Login({ handleLogin }) {
-    const [formValue, setFormValue] = useState({
-        email: '',
-        password: ''
-    })
 
-    const handleChange = (e) => {
-        const { name, value } = e.target;
-
-        setFormValue({
-            ...formValue,
-            [name]: value
-        });
-    }
-
-    const handleSubmit = (e) => {
-        e.preventDefault();
-        if (!formValue.email || !formValue.password) {
-            return;
-        }
-        handleLogin(formValue.email, formValue.password)
+    const handleSubmit = (formValue) => {
+        handleLogin(formValue);
     }
 
     return (
@@ -37,7 +20,6 @@ export default function Login({ handleLogin }) {
                     bottomLink="Регистрация"
                     linkTarget="/signup" 
                     onSubmit={handleSubmit}
-                    onChange={handleChange}
                 />
             </section>
         </main>
