@@ -1,9 +1,8 @@
 import './App.css';
 import React from 'react';
 import { useState, useEffect } from 'react';
-import { Route, Routes, json, useLocation, useNavigate, } from 'react-router-dom';
+import { Route, Routes, useNavigate, } from 'react-router-dom';
 import { CurrentUserContext } from '../../contexts/currentUserContext';
-import { useRef } from 'react';
 import errors from '../../utils/errors';
 import ProtectedRouteElement from '../ProtectedRoute';
 

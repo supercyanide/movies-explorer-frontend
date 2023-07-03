@@ -46,7 +46,6 @@ export default function Movies({onButtonClick, allMovies, savedMovies}){
                     savedMovies={savedMovies}
                     movies={sortedMovies??localMovies}
                     buttonClassName='card__like-button'
-                    isMoreButton={true}
                     onButtonClick={onButtonClick}
 
                 />

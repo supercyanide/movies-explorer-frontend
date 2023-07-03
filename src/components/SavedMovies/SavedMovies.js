@@ -7,8 +7,6 @@ import { useLocation } from 'react-router-dom';
 
 
 export default function SavedMovies({ onRemove, savedMovies, setSavedMovies }){
-    // const [savedMovies, setSavedMovies] = useState(JSON.parse(localStorage.getItem('savedMovies')))
-    const [searchValue, setSearchValue] = useState('');
     const [sortedMovies,setSortedMovies] = useState(savedMovies);
     const [lastSearchValue, setLastSearchValue] = useState('');
 
@@ -56,20 +54,17 @@ export default function SavedMovies({ onRemove, savedMovies, setSavedMovies }){
         onRemove(movie);
         setSortedMovies(sortedMovies.filter((item) =>item.movieId!==movie.movieId))
     }
-
     
     return(
         <main className='saved-page'>
             <SearchForm
                 handleSearch={handleSavedSearch}
                 handleCheckboxSearch={handleCheckboxSearch}
-                // onChange={handleChange}
 
             />
             <MoviesCardList
                 movies={sortedMovies}
                 buttonClassName='card__remove-button'
-                isMoreButton={false}
                 onButtonClick={handleRemove}
             />
         </main>
