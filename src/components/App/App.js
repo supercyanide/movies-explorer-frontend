@@ -83,7 +83,7 @@ function App() {
     auth.signin(formValue)
       .then(() => {
         setLoggedIn(true);
-        localStorage.setItem('loggedIn', true);
+        localStorage.setItem("loggedIn", true);
         navigate('/');
       })
       .catch(err => {
@@ -97,10 +97,10 @@ function App() {
   function handleRegister(formValue) {
     auth.signup(formValue)
       .then(() => {
-        handleLogin(formValue)
-        setIsError(false)
-        setPopupMessage("Регистрация прошла успешно")
-        setIsPopupOpened(true)
+        handleLogin(formValue);
+        setIsError(false);
+        setPopupMessage("Регистрация прошла успешно");
+        setIsPopupOpened(true);
       })
       .catch((err) => {
         setIsError(true)
@@ -111,10 +111,12 @@ function App() {
   }
 
   function signOut() {
-    localStorage.removeItem('token');
+    localStorage.clear();
+    setIsPopupOpened(false);
     setCurrentUser({});
     setLoggedIn(false);
-    localStorage.setItem('loggedIn', false)
+    setSavedMovies([]);
+    setAllMovies([]);
     navigate('/signin');
   }
 
@@ -134,7 +136,7 @@ function App() {
   }
 
   function identifyError(code){
-    return (code + ' '+ errors[code])
+    return (code + ' ' + errors[code])
   }
 
   function removeFromSaved(id) {
