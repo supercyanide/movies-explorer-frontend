@@ -84,7 +84,7 @@ function App() {
       .then(() => {
         setLoggedIn(true);
         localStorage.setItem("loggedIn", true);
-        navigate('/');
+        navigate('/movies');
       })
       .catch(err => {
         setIsError(true);
