@@ -2,28 +2,39 @@ import ProfileInput from "../ProfileInput/ProfileInput";
 import useValidation from "../../../hooks/useValidation";
 import { useState, useEffect } from "react";
 
-export default function ProfileForm({ inputs, onSignout, onSubmit, currentUser, submitErrorMessage}) {
-    const[isSubmitVisible, setSubmitVisible] = useState(false);
+export default function ProfileForm({ inputs, onSignout, onSubmit, currentUser, submitErrorMessage, isSubmitVisible1}) {
+    const[isSubmitVisible, setSubmitVisible] = useState(isSubmitVisible1);
     const [isDisabled, setDisabled] = useState(true);
-
     const obj = currentUser;
     delete obj._id
     delete obj.__v
 
     const { values, errors, isValid, handleChange, resetForm } = useValidation(".profile-form", obj);
-    
+    function handleChange1(evt) {
+        console.log(evt.target.name)
+
+
+        // handleChange(evt.target)
+    }
     useEffect(() => {
         resetForm();
     }, [resetForm]);
 
     async function handleSubmit(evt) {
         evt.preventDefault();
-        try {
-            onSubmit && await onSubmit(values);
-        } catch (err) {
-            console.log(err)
-        }
-        toggleControlsVisibility()
+        onSubmit(values)
+        .then((res) => {
+            if (res) {
+                toggleControlsVisibility()
+            } else {
+                handleChange({
+                    target: {
+                        name: 'email',
+                        value: currentUser.email
+                    }
+                })
+            }
+        })
     }
     function toggleControlsVisibility() {
         setSubmitVisible(!isSubmitVisible);
@@ -48,7 +59,6 @@ export default function ProfileForm({ inputs, onSignout, onSubmit, currentUser, 
                     validate={validate}
                     validationMessage={errors[name]} 
                     isDisabled={isDisabled}
-
                 />
             )}
             </fieldset>

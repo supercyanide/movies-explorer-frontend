@@ -119,18 +119,22 @@ function App() {
     setAllMovies([]);
     navigate('/signin');
   }
+  const [isSubmitVisible, setSubmitVisible] =useState(false);
 
   function handleUpdateUser ({ name, email }) {
-    api.editUserInfo({name, email})
+    console.log(name,email)
+    return api.editUserInfo({name, email})
       .then((result) => {
         setCurrentUser(result.data);
         setIsError(false);
         setPopupMessage('Данные успешно сохранены');
         setIsPopupOpened(true);
+        return result;
       })
       .catch((err) => {
-        console.log(err);
-        setPopupMessage(err);
+        setSubmitVisible(true)
+        setIsError(true);
+        setPopupMessage(identifyError(err));
         setIsPopupOpened(true);
       })
   }
@@ -246,7 +250,8 @@ function App() {
                 <Header isLogged={loggedIn}/>
                 <ProtectedRouteElement element={Profile} loggedIn={loggedIn} 
                   onSignout={signOut} 
-                  onUpdate={handleUpdateUser} />
+                  onSubmit={handleUpdateUser} 
+                  isSubmitVisible={isSubmitVisible}/>
               </>
             }/>
             {/* роут 404 */}
