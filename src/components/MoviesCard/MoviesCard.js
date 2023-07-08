@@ -25,7 +25,7 @@ export default function MoviesCard({movie, buttonClassName, onButtonClick, saved
 
         return(
             <li className='card'>
-                <a target='_blank' href={movie.trailerUrl} rel="noreferrer" className='card__trailer-link' >
+                <a target='_blank' href={movie.trailerLink} rel="noreferrer" className='card__trailer-link' >
                     <img className='card__image' alt={movie.nameRU} src={movie.image}/>
                 </a>
                 <div className='card__block'>
