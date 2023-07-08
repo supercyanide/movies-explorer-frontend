@@ -117,12 +117,11 @@ function App() {
     setLoggedIn(false);
     setSavedMovies([]);
     setAllMovies([]);
-    navigate('/signin');
+    navigate('/');
   }
   const [isSubmitVisible, setSubmitVisible] =useState(false);
 
   function handleUpdateUser ({ name, email }) {
-    console.log(name,email)
     return api.editUserInfo({name, email})
       .then((result) => {
         setCurrentUser(result.data);
