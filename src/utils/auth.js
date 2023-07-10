@@ -1,5 +1,4 @@
-// const BASE_URL = 'https://api.movies.supercyanide.nomoredomains.rocks';
-const BASE_URL = 'http://localhost:3000';
+const BASE_URL = 'https://api.movies.supercyanide.nomoredomains.rocks';
 
 function checkResponse(res) {
   if (res.ok) {
