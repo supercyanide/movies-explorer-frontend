@@ -62,26 +62,6 @@ export class Api {
 
         return this._post(`/movies/${id}`,'DELETE')
     }
-
-    // editAvatar(body) {
-    //     return this._post('/users/me/avatar','PATCH',body);
-    // };
-
-    // addNewCard(body) {
-    //     return this._post('/cards', 'POST', body);
-    // };
-
-    // deleteCard(id) {
-    //     return this._post(`/cards/${id}`, 'DELETE');
-    // };
-
-    // addLike(id) {
-    //     return this._post(`/cards/${id}/likes`, 'PUT');
-    // };
-
-    // deleteLike(id) {
-    //     return this._post(`/cards/${id}/likes`, 'DELETE');
-    // };
 };
 
 const api = new Api(mainApi);

@@ -1,7 +1,7 @@
 import './App.css';
 import React from 'react';
 import { useState, useEffect } from 'react';
-import { Route, Routes, useNavigate, } from 'react-router-dom';
+import { Route, Routes, useNavigate, Navigate} from 'react-router-dom';
 import { CurrentUserContext } from '../../contexts/currentUserContext';
 import errors from '../../utils/errors';
 import ProtectedRouteElement from '../ProtectedRoute';
@@ -207,9 +207,15 @@ function App() {
           <Routes>
             {/* незащищенные роуты */}
             <Route path='/signup' element={
+              loggedIn? 
+              <Navigate to='/movies'/>
+              :
               <Register handleRegister={handleRegister}/>
             }/>
             <Route path='/signin' element={
+              loggedIn ? 
+              <Navigate to='/movies'/>
+              :
               <Login handleLogin={handleLogin}/>
             }/>
             <Route exact path='/' element={
