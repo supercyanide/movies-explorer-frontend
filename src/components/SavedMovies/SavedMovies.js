@@ -4,6 +4,7 @@ import './SavedMovies.css';
 import MoviesCardList from '../MoviesCardList/MoviesCardList';
 import SearchForm from '../SearchForm/SearchForm';
 import { useLocation } from 'react-router-dom';
+import {shortMoviesDuration} from '../../utils/consts'
 
 
 export default function SavedMovies({ onRemove, savedMovies, setSavedMovies }){
@@ -22,7 +23,7 @@ export default function SavedMovies({ onRemove, savedMovies, setSavedMovies }){
         console.log(checked)
         if (value && checked) {
           return savedMovies.filter((item) =>
-            ((((item.nameEN).toLowerCase()).includes(value.toLowerCase())||((item.nameRU).toLowerCase()).includes(value.toLowerCase())) && item.duration <=40)
+            ((((item.nameEN).toLowerCase()).includes(value.toLowerCase())||((item.nameRU).toLowerCase()).includes(value.toLowerCase())) && item.duration <= shortMoviesDuration)
           )
         }
         else if(!checked) {
@@ -44,7 +45,6 @@ export default function SavedMovies({ onRemove, savedMovies, setSavedMovies }){
         if (lastSearchValue){
             const sortedMovieSearch = filter(lastSearchValue, checkboxValue);
             if (sortedMovieSearch) setSortedMovies(sortedMovieSearch)
-            
         }
         else return
         

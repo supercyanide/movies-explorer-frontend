@@ -16,7 +16,7 @@ export default function Profile({ onSignout, onSubmit, submitErrorMessage = '', 
                     submitErrorMessage={submitErrorMessage}
                     onSignout={onSignout}
                     onSubmit={onSubmit}
-                    isSubmitVisible1={isSubmitVisible}
+                    submitVisibility={isSubmitVisible}
                 />
             </section>
         </main>

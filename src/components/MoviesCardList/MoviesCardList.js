@@ -7,20 +7,20 @@ import LoadMoreButton from '../LoadMoreButton/LoadMoreButton';
 import MoviesCard from '../MoviesCard/MoviesCard.js';
 
 import useDimensions from '../../hooks/useDimentions';
-
+import {mobileDefaultWidth, tabletDefaultWidth, desktopDefaultWidth, mobileOffset, tabletOffset, desktopOffset, desktopWidth, tabletWidth} from '../../utils/consts'
 
 export default function MoviesCardList({ movies, buttonClassName, onButtonClick, savedMovies}){
     const { width } = useDimensions();
 
-    let defaultWidth = 5;
-    let offset = 1;
+    let defaultWidth = mobileDefaultWidth;
+    let offset = mobileOffset;
 
-    if (width >= 1280 ) {
-        defaultWidth = 12;
-        offset = 3;
-    } else if (width >= 768) {
-        defaultWidth = 8;
-        offset = 2;
+    if (width >= desktopWidth ) {
+        defaultWidth = desktopDefaultWidth;
+        offset = desktopOffset;
+    } else if (width >= tabletWidth) {
+        defaultWidth = tabletDefaultWidth;
+        offset = tabletOffset;
     }
 
     const location = useLocation();

@@ -2,20 +2,14 @@ import ProfileInput from "../ProfileInput/ProfileInput";
 import useValidation from "../../../hooks/useValidation";
 import { useState, useEffect } from "react";
 
-export default function ProfileForm({ inputs, onSignout, onSubmit, currentUser, submitErrorMessage, isSubmitVisible1}) {
-    const[isSubmitVisible, setSubmitVisible] = useState(isSubmitVisible1);
+export default function ProfileForm({ inputs, onSignout, onSubmit, currentUser, submitErrorMessage, submitVisibility}) {
+    const[isSubmitVisible, setSubmitVisible] = useState(submitVisibility);
     const [isDisabled, setDisabled] = useState(true);
     const obj = currentUser;
     delete obj._id
     delete obj.__v
 
     const { values, errors, isValid, handleChange, resetForm } = useValidation(".profile-form", obj);
-    function handleChange1(evt) {
-        console.log(evt.target.name)
-
-
-        // handleChange(evt.target)
-    }
     useEffect(() => {
         resetForm();
     }, [resetForm]);

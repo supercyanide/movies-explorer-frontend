@@ -29,6 +29,7 @@ function App() {
   const [loggedIn, setLoggedIn] = useState(JSON.parse(localStorage.getItem('loggedIn'))||false);
   
   const [currentUser, setCurrentUser] = useState({});
+  const [isSubmitVisible, setSubmitVisible] = useState(false);
   
   const [savedMovies, setSavedMovies] = useState(JSON.parse(localStorage.getItem('savedMovies'))||[]);
   const [isError, setIsError] = useState(false);
@@ -119,7 +120,7 @@ function App() {
     setAllMovies([]);
     navigate('/');
   }
-  const [isSubmitVisible, setSubmitVisible] =useState(false);
+  
 
   function handleUpdateUser ({ name, email }) {
     return api.editUserInfo({name, email})
