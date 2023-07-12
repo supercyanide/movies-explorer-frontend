@@ -20,6 +20,7 @@
     transition: border-bottom 0.3s ease;
     box-sizing: border-box;
     margin-bottom: 6px;
+    width: 100%;
 }
   
 .input-block__input:focus {

@@ -1,31 +1,22 @@
 import './AuthFormInput.css';
-
 export default function AuthFormInput({
-    value ='',
+    value = '',
     validationMessage,
-    validate,
     isDisabled = false,
-
+    pattern,
     label,
     name,
     type,
-
     min,
     max,
     placeholder,
     onChange
-}) 
-{
+})
+{   
     function handleChange(evt) {
-        if (validate && evt.target.value && !validate(evt.target.value))
-            evt.target.setCustomValidity(validationMessage);
-        else
-            evt.target.setCustomValidity('');
         onChange(evt);
     }
-
     return (
-        
         <label className="input-block">{label}
             <input
                 type={type}
@@ -38,6 +29,7 @@ export default function AuthFormInput({
                 placeholder={placeholder}
                 onChange={handleChange}
                 disabled={isDisabled}
+                pattern={pattern}
             />
             <span className="input-block__error">{validationMessage}</span>
         </label>

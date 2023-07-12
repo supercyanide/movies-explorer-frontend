@@ -20,7 +20,6 @@ export default function SavedMovies({ onRemove, savedMovies, setSavedMovies }){
     },[location.pathname])
     
     function filter(value,checked){
-        console.log(checked)
         if (value && checked) {
           return savedMovies.filter((item) =>
             ((((item.nameEN).toLowerCase()).includes(value.toLowerCase())||((item.nameRU).toLowerCase()).includes(value.toLowerCase())) && item.duration <= shortMoviesDuration)
@@ -33,10 +32,11 @@ export default function SavedMovies({ onRemove, savedMovies, setSavedMovies }){
         }
     }
 
-    function handleSavedSearch({value, isChecked}){
-        setLastSearchValue(value);
+    function handleSavedSearch({savedValue, isChecked}){
+        console.log(savedValue)
+        setLastSearchValue(savedValue);
         if(savedMovies){
-            const sortedMovieSearch = filter(value, parseInt(isChecked));
+            const sortedMovieSearch = filter(savedValue, parseInt(isChecked));
             setSortedMovies(sortedMovieSearch);
         }
     }
@@ -58,9 +58,8 @@ export default function SavedMovies({ onRemove, savedMovies, setSavedMovies }){
     return(
         <main className='saved-page'>
             <SearchForm
-                handleSearch={handleSavedSearch}
+                handleSavedSearch={handleSavedSearch}
                 handleCheckboxSearch={handleCheckboxSearch}
-
             />
             <MoviesCardList
                 movies={sortedMovies}

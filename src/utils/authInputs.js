@@ -1,5 +1,8 @@
 export function isEmail(string) {
-    return string && /[^@\s]+@[^@\s]+\.[^@\s]+/.test(string);
+    return string && /^\S+@\S+\.\S+$/.test(string);
+}
+export function isPassword(string) {
+    return string && /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[a-zA-Z]).{8,}$/.test(string);
 }
 
 export function isName(string) {
@@ -14,7 +17,8 @@ export const registerInputs = [
         min: 2,
         max:20,
         validate: isName,
-        validationMessage:'Введите корректное имя'
+        validationMessage:'Введите корректное имя',
+        pattern: "^[a-z ,.'-]+$",
     }, 
     { 
         caption: 'E-mail', 
@@ -23,13 +27,15 @@ export const registerInputs = [
         min: 2,
         max:40,
         validate: isEmail,
-        validationMessage:'Введите корректный Email'
+        validationMessage:'Введите корректный Email',
+        pattern: "^\S+@\S+\.\S+$",
     }, 
     { 
         caption: 'Пароль', 
         name: 'password', 
         type:'password', 
         isValid: false,
+        validate: isPassword,
         min: 8,
         max:25,
         validationMessage:'Введите корректный пароль'
@@ -44,8 +50,8 @@ export const loginInputs = [
         min: 8,
         max:40,
         placeholder:'Введите Email',
-        validate: isEmail,
-        validationMessage:'Введите корректный Email'
+        validationMessage:'Введите корректный Email',
+        pattern:'^\S+@\S+\.\S+$'
         
     }, 
     { 
@@ -56,7 +62,8 @@ export const loginInputs = [
         min: 8,
         max:25,
         placeholder:'Введите пароль',
-        validationMessage:'Введите корректный пароль'
+        validationMessage:'Введите корректный пароль',
+        // pattern:'^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[a-zA-Z]).{8,}$'
 
     }
 ];
@@ -69,7 +76,8 @@ export const profileInputs = [
         max:20,
         validate: isName,
         placeholder:'Введите имя',
-        validationMessage:'Введите корректное имя'
+        validationMessage:'Введите корректное имя',
+        pattern: '^[a-zа-я\s-]+$/i',
     },
     { 
         caption: 'E-mail', 
@@ -80,8 +88,8 @@ export const profileInputs = [
         max:40,
         validate: isEmail,
         placeholder:'Введите Email',
-        validationMessage:'Введите корректный Email'
-        
+        validationMessage:'Введите корректный Email',
+        pattern: '^\S+@\S+\.\S+$',
     }, 
     
 ];

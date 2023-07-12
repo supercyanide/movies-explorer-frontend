@@ -12,13 +12,16 @@ function useValidation(formSelector, currentUser) {
         }
     }
 
-    const handleChange = ({ target }) => {
+    const handleChange = ({target}) => {
+        console.log(target.validationMessage)
         const { name, value } = target;
         setValues({ ...values, [name]: value });
         setErrors({ ...errors, [name]: target.validationMessage });
         if (currentUser){
             setIsValid(checkValidity(form, name, value));
-        }else setIsValid(form.checkValidity())
+        }else {
+            setIsValid(form.checkValidity())
+        }
         
     }
 
