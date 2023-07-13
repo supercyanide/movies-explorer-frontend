@@ -1,5 +1,3 @@
-import AuthForm from "../AuthForm/AuthForm";
-import {registerInputs as inputs} from '../../utils/authInputs';
 import LogoPath from '../../images/logo.svg';
 import { Link } from 'react-router-dom';
 import useValidation from '../../hooks/useValidation';
