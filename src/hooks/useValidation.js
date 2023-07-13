@@ -1,28 +1,24 @@
-import { useState, useCallback } from 'react';
+import { useState, useCallback, useEffect } from 'react';
 
 function useValidation(formSelector, currentUser) {
     const form = document.body.querySelector(formSelector);
     const [values, setValues] = useState(currentUser||{});
     const [errors, setErrors] = useState({});
     const [isValid, setIsValid] = useState(false);
-
-    const checkValidity = (form, name, value ) => {
-        if (form.checkValidity()===true && value !== currentUser[name]){
-            return true
+    
+    useEffect(()=>{
+        if (!currentUser && form){
+            setIsValid(form.checkValidity())
         }
-    }
+        if(currentUser && form) {
+            setIsValid(form.checkValidity()&&(values.name != currentUser.name || values.email != currentUser.email));
+        }
+    },[currentUser, form, values])
 
     const handleChange = ({target}) => {
-        console.log(target.validationMessage)
         const { name, value } = target;
         setValues({ ...values, [name]: value });
         setErrors({ ...errors, [name]: target.validationMessage });
-        if (currentUser){
-            setIsValid(checkValidity(form, name, value));
-        }else {
-            setIsValid(form.checkValidity())
-        }
-        
     }
 
     const resetForm = useCallback((newValues = currentUser||{}, newErrors = {}, newIsValid = false) => {
