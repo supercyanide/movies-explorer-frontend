@@ -16,14 +16,14 @@ export default function Movies({onButtonClick, allMovies, savedMovies}){
         if (value===null) return
         if (checked) {
           return allMovies.filter((item) => 
-            (((item.nameEN).toLowerCase().includes(value)||(item.nameRU).toLowerCase().includes(value)) && item.duration <= shortMoviesDuration)
+            (((item.nameEN).toLowerCase().includes(value.toLowerCase())||(item.nameRU).toLowerCase().includes(value.toLowerCase())) && item.duration <= shortMoviesDuration)
           )
         }
-        else return allMovies.filter((item) => (item.nameEN).toLowerCase().includes(value)||(item.nameRU).toLowerCase().includes(value))
+        else return allMovies.filter((item) => (item.nameEN).toLowerCase().includes(value.toLowerCase())||(item.nameRU).toLowerCase().includes(value.toLowerCase()))
     }
 
     function handleSearch(){
-        const value = localStorage.getItem('lastSearchValue').toLowerCase();
+        const value = localStorage.getItem('lastSearchValue');
         const isChecked = localStorage.getItem('lastCheckboxValue');
         const sortedMovieSearch = filter(value, parseInt(isChecked));
         if (sortedMovieSearch) {
@@ -33,7 +33,7 @@ export default function Movies({onButtonClick, allMovies, savedMovies}){
         setIsPreloaderActive(false);
     }
     function handleCheckboxSearch(checkboxValue){
-        const value = localStorage.getItem('lastSearchValue').toLowerCase();
+        const value = localStorage.getItem('lastSearchValue');
         const sortedMovieSearch = filter(value,checkboxValue);
         if (sortedMovieSearch) {
             localStorage.setItem('filtered', JSON.stringify(sortedMovieSearch));
