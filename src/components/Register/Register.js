@@ -9,7 +9,7 @@ export default function Register({ handleRegister }) {
     const { values, errors, isValid, handleChange, resetForm } = useValidation(".auth-form");
     
 
-    useEffect(() => resetForm(), [resetForm]);
+    // useEffect(() => resetForm(), [resetForm]);
 
     async function handleSubmit(evt) {
         evt.preventDefault();

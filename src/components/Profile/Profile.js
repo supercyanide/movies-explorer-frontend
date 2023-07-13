@@ -1,7 +1,7 @@
 import './Profile.css';
 import { useContext } from 'react';
 import { CurrentUserContext } from '../../contexts/currentUserContext';
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import useValidation from '../../hooks/useValidation';
 
 export default function Profile({ onSignout, onSubmit, submitErrorMessage = '', submitVisibility}) {
@@ -14,26 +14,24 @@ export default function Profile({ onSignout, onSubmit, submitErrorMessage = '', 
     delete obj._id
     delete obj.__v
 
-    const { values, errors, isValid, handleChange, resetForm } = useValidation(".profile-form", obj);
-    useEffect(() => {
-        resetForm();
-    }, [resetForm]);
+    const { values, errors, isValid, handleChange, isFormChanged, resetForm } = useValidation(".profile-form", obj);
 
     async function handleSubmit(evt) {
         evt.preventDefault();
         onSubmit(values)
-        .then((res) => {
-            if (res) {
-                toggleControlsVisibility()
-            } else {
-                handleChange({
-                    target: {
-                        name: 'email',
-                        value: currentUser.email
-                    }
-                })
-            }
-        })
+            .then((res) => {
+                if (res) {
+                    toggleControlsVisibility();
+                    resetForm();
+                } else {
+                    handleChange({
+                        target: {
+                            name: 'email',
+                            value: currentUser.email
+                        }
+                    })
+                }
+            })
     }
     function toggleControlsVisibility() {
         setSubmitVisible(!isSubmitVisible);
@@ -89,7 +87,7 @@ export default function Profile({ onSignout, onSubmit, submitErrorMessage = '', 
                         {isSubmitVisible ?
                             <div className="profile-form__submit-block">
                                 <span className="profile-form__error">{submitErrorMessage}</span>
-                                <button type='submit' className="profile-form__submit-btn" disabled={!isValid} onClick={handleSubmit} >Сохранить</button>
+                                <button type='submit' className="profile-form__submit-btn" disabled={isValid === false || isFormChanged === false} onClick={handleSubmit} >Сохранить</button>
                             </div>
                         :
                             <div className="profile-form__control-block">

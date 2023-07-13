@@ -1,20 +1,23 @@
 import { Link } from 'react-router-dom';
+
 import useValidation from '../../hooks/useValidation';
 import LogoPath from '../../images/logo.svg';
-
-import { useEffect } from 'react';
+import './Login.css'
 
 export default function Login({ handleLogin }) {
 
-    const { values, errors, isValid, handleChange, resetForm } = useValidation(".auth-form");
-
-    useEffect(() => resetForm(), [resetForm]);
+    const { values, errors, isValid, handleChange } = useValidation(
+        ".auth-form", 
+        { 
+            email: '',
+            password: ''
+        }
+    );
 
     async function handleSubmit(evt) {
         evt.preventDefault();
         try {
-            const result = handleLogin && await handleLogin(values);
-            if (!result || !result.ok) throw new Error(result.error);
+            await handleLogin(values);
         } catch (error) {
             console.log(error)
         }
