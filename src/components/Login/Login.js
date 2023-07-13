@@ -7,8 +7,7 @@ import './Login.css'
 export default function Login({ handleLogin }) {
 
     const { values, errors, isValid, handleChange } = useValidation(
-        ".auth-form", 
-        { 
+        {
             email: '',
             password: ''
         }

@@ -14,7 +14,7 @@ export default function Profile({ onSignout, onSubmit, submitErrorMessage = '', 
     delete obj._id
     delete obj.__v
 
-    const { values, errors, isValid, handleChange, isFormChanged, resetForm } = useValidation(".profile-form", obj);
+    const { values, errors, isValid, handleChange, isFormChanged, resetForm } = useValidation(obj);
 
     async function handleSubmit(evt) {
         evt.preventDefault();

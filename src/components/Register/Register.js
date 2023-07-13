@@ -1,21 +1,16 @@
 import LogoPath from '../../images/logo.svg';
 import { Link } from 'react-router-dom';
 import useValidation from '../../hooks/useValidation';
-import { useEffect } from "react";
 
 
 export default function Register({ handleRegister }) {
 
-    const { values, errors, isValid, handleChange, resetForm } = useValidation(".auth-form");
+    const { values, errors, isValid, handleChange } = useValidation();
     
-
-    // useEffect(() => resetForm(), [resetForm]);
-
     async function handleSubmit(evt) {
         evt.preventDefault();
         try {
-            const result = handleRegister && await handleRegister(values);
-            if (!result || !result.ok) throw new Error(result.error);
+            await handleRegister(values);
         } catch (error) {
             console.log(error)
         }
