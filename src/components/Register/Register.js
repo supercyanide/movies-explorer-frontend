@@ -44,7 +44,7 @@ export default function Register({ handleRegister }) {
                                 placeholder='Имя'
                                 onChange={handleChange}
                                 disabled={false}
-                                pattern="^[a-zа-я\s-]+$"
+                                pattern="^[A-ЯЁа-яёA-Za-z\s]+$"
                             />
                             <span className="input-block__error">{errors.name}</span>
                         </div>
