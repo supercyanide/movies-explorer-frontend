@@ -11,6 +11,7 @@ export default function SavedMovies({ onRemove, savedMovies, setSavedMovies }){
     const [sortedMovies,setSortedMovies] = useState(savedMovies);
     const [lastSearchValue, setLastSearchValue] = useState('');
 
+
     const location = useLocation();
     
     useEffect(()=>{ 
@@ -32,11 +33,10 @@ export default function SavedMovies({ onRemove, savedMovies, setSavedMovies }){
         }
     }
 
-    function handleSavedSearch({savedValue, isChecked}){
-        console.log(savedValue)
+    function handleSavedSearch({savedValue, isSavedChecked}){
         setLastSearchValue(savedValue);
         if(savedMovies){
-            const sortedMovieSearch = filter(savedValue, parseInt(isChecked));
+            const sortedMovieSearch = filter(savedValue, isSavedChecked);
             setSortedMovies(sortedMovieSearch);
         }
     }
@@ -47,7 +47,6 @@ export default function SavedMovies({ onRemove, savedMovies, setSavedMovies }){
             if (sortedMovieSearch) setSortedMovies(sortedMovieSearch)
         }
         else return
-        
     }
 
     function handleRemove(movie){
@@ -67,6 +66,5 @@ export default function SavedMovies({ onRemove, savedMovies, setSavedMovies }){
                 onButtonClick={handleRemove}
             />
         </main>
-            
     )
 }

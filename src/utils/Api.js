@@ -28,7 +28,6 @@ export class Api {
     };
 
     _post(link, method, body) {
-        console.log(body)
         return fetch(`${this._baseUrl}${link}`, {
             method: method,
             headers: this._getHeaders(),

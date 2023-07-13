@@ -22,9 +22,8 @@ export default function SearchForm({handleSearch, handleCheckboxSearch, handleSa
             handleSearch({value,isChecked});
         }
         if (location.pathname === '/saved-movies') {
-            handleSavedSearch({savedValue,isChecked});
+            handleSavedSearch({savedValue, isSavedChecked});
         }
-        
     }
 
     function handleChange({ target: { checked: newState } } ) {

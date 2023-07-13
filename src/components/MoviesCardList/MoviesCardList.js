@@ -56,7 +56,8 @@ export default function MoviesCardList({ movies, buttonClassName, onButtonClick,
                 /> 
                 : ""
             }
-            {location.pathname ==='/saved-movies' && (Array.isArray(movies)&&(!movies.length))
+            {
+            (Array.isArray(movies)&&(!movies.length))
             ? <h2 className="movies-card-list__title">Фильмов не найдено</h2>
             :""
             }
