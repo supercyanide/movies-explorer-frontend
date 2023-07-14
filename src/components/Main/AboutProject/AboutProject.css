@@ -1,0 +1,133 @@
+.about-project {
+    padding: 110px 70px 110px;
+}
+  
+.about-project__texts {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    gap: 53px;
+    margin-top: 70px;
+    padding-bottom: 110px;
+}
+
+.about-project__subtitle {
+    font-size: 20px;
+    font-weight: 400;
+    line-height: 24px;
+    margin: 0;
+    padding: 0;
+    letter-spacing: -0.8px;
+}
+
+.about-project__caption {
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 20px;
+    margin: 0;
+    padding: 0;
+    margin-top: 26px;
+}
+
+.time {
+    display: grid;
+    grid-template-columns: 1fr 4fr;
+}
+
+.time__bar {
+    display: flex;
+    background-color: #F2F2F2;
+    height: 36px;
+    justify-content: center;
+    align-items: center;
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 17px;
+}
+.time__bar_green {
+    background-color: #2BE080;
+}
+
+.time__caption {
+    color: #A0A0A0;
+    justify-content: center;
+    align-items: center;
+    display: flex;
+    font-size: 14px;
+    font-weight: 500;
+    line-height: 17px;
+    margin-top: 15px;
+}
+
+@media screen and (max-width: 768px) {
+    .about-project {
+        padding: 90px 50px 90px;
+    }
+
+    .about-project__caption {
+        font-size: 12px;
+        font-weight: 400;
+        line-height: 18px;
+        margin-top: 22px;
+    }
+    .about-project__texts {
+        gap: 37px;
+        padding-bottom: 93px;
+    }
+    .time__caption {
+        font-weight: 400;
+        margin-top: 14px;
+    }
+    .time__bar_green{
+        min-width: 140px;
+    }
+}
+
+@media screen and (max-width: 540px) {
+    .about-project {
+        padding: 70px 18px;
+    }
+    .about-project__texts {
+        margin-top: 60px;
+        flex-wrap: wrap;
+        gap: 56px;
+    }
+
+    .about-project__subtitle {
+        font-size: 18px;
+        line-height: 22px;
+        letter-spacing: -0.7px;
+    }
+
+    .about-project__caption {
+        font-size: 11px;
+        line-height: 16px;
+        margin-top: 16px;
+    }
+
+    .time__bar {
+        font-size: 11px;
+        line-height: 13px;
+    }
+    .time__caption {
+        font-size: 11px;
+        line-height: 13px;
+    }
+}
+@media screen and (max-width: 400px) {
+    .about-project {
+        padding: 70px 18px 70px;
+    }
+    .about-project__texts{
+        padding-bottom: 60px;
+    }
+    .time__bar_green {
+        min-width: 100px;
+    }
+    .time__caption{
+        margin-top: 9px;
+    }
+
+
+}

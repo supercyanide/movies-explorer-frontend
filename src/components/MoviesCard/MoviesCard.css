@@ -1,0 +1,140 @@
+.card{
+    display: flex;
+    flex-direction: column;
+    min-height: 281px;
+    box-shadow: 0px 8px 20px 0px rgba(0, 0, 0, 0.1);
+    border-radius: 6px;
+    overflow: hidden;
+    height: 281px;
+}
+
+.card__image{
+    width: 100%;
+    height: max-content;
+}
+.card__trailer-link{
+    height: 203px;
+    width: auto;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+}
+
+.card__title{
+    font-size: 13px;
+    font-weight: 500;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    margin: 7px 0 0;
+}
+
+.card__duration{
+    color: #A0A0A0;
+    font-size: 11px;
+    margin: 0;
+}
+
+
+
+.card__button{
+    background-repeat: no-repeat;
+    background-position: center;
+    background-color: transparent;
+    cursor: pointer;
+    border: none;
+    padding: 0;
+    margin: 0;
+    width: 30px;
+    height: 30px;
+}
+
+.card__like-button{
+    background-image: url(../../images/like-button.svg);
+}
+
+.card__remove-button{
+    background-image: url(../../images/like-button__remove.svg);
+    visibility: hidden;
+}
+
+.card__button:hover {
+    opacity: 0.5;
+}
+
+.card__info{
+    width: 95%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+.card:hover{
+    cursor: pointer;
+}
+.card:hover .card__button.card__remove-button{
+    visibility: visible;
+}
+
+.card__like-button_active{
+    background-image: url(../../images/like-button_active.svg);
+}
+
+.card__block{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    padding: 9px 16px 16px 16px;
+    height: 78px;
+}
+
+
+@media screen and (max-width: 768px) {
+    .card {
+        min-height: 262px;
+    }
+    .card__info{
+        max-width: 220px;
+        gap: 15px;
+    }
+    .card__block{
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        height: 72px;
+        padding: 9px 14px 14px 14px;
+    }
+    .card__trailer-link{
+        height: 190px;
+    }
+}
+@media screen and (max-width: 651px) {
+    .card{
+        width: 95%;
+    }
+    
+}
+
+@media screen and (max-width: 400px) {
+    .card {
+        min-height: 237px;
+        width: 280px;
+    }
+    .card__trailer-link{
+        height: 168px;
+    }
+    .card__title{
+        font-size: 12px;
+        letter-spacing: 0;
+        margin: 5px 0 0;
+    }
+    .card__info{
+        gap: 14px;
+    }
+    .card__block{
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        height: 69px;
+    }
+}
