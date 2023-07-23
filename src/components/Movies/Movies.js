@@ -6,7 +6,7 @@ import { useState } from 'react';
 import {shortMoviesDuration} from '../../utils/consts'
 
 
-export default function Movies({onButtonClick, allMovies, savedMovies}){
+export default function Movies({onButtonClick, allMovies, savedMovies, onSearch}){
     const [isPreloaderActive, setIsPreloaderActive] = useState(false);
     const localMovies = JSON.parse(localStorage.getItem('filtered'));
     const [sortedMovies, setSortedMovies] = useState()
@@ -23,14 +23,15 @@ export default function Movies({onButtonClick, allMovies, savedMovies}){
     }
 
     function handleSearch(){
-        const value = localStorage.getItem('lastSearchValue');
-        const isChecked = localStorage.getItem('lastCheckboxValue');
-        const sortedMovieSearch = filter(value, parseInt(isChecked));
-        if (sortedMovieSearch) {
-            localStorage.setItem('filtered', JSON.stringify(sortedMovieSearch));
-            setSortedMovies(sortedMovieSearch);
-        }
-        setIsPreloaderActive(false);
+        onSearch(localStorage.getItem('lastSearchValue'))
+        // const value = localStorage.getItem('lastSearchValue');
+        // const isChecked = localStorage.getItem('lastCheckboxValue');
+        // const sortedMovieSearch = filter(value, parseInt(isChecked));
+        // if (sortedMovieSearch) {
+        //     localStorage.setItem('filtered', JSON.stringify(sortedMovieSearch));
+        //     setSortedMovies(sortedMovieSearch);
+        // }
+        // setIsPreloaderActive(false);
     }
     function handleCheckboxSearch(checkboxValue){
         const value = localStorage.getItem('lastSearchValue');

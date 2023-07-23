@@ -54,7 +54,7 @@ function App() {
 
   useEffect(() => {
     if (loggedIn) {
-      getAllMovies();
+      // getAllMovies();
       api
         .getFavoriteMovies()
         .then((res)=> setSavedMovies(res))
@@ -191,7 +191,6 @@ function App() {
   const getAllMovies = () => {
     moviesApi.getMovies()
       .then((res) => {
-        console.log()
         let moviesList = res.map((item) => convertMovieData(item)); // форматирование полей
         localStorage.setItem("allMovies", JSON.stringify(moviesList));
         setAllMovies(moviesList);
@@ -200,6 +199,13 @@ function App() {
         console.log(err)}
       );
   };
+
+  function onSearch(value) {
+    moviesApi.search(value)
+    .then((res)=>{
+      console.log(res)
+    })
+  }
 
   return (
     <div className='page'>
@@ -234,6 +240,7 @@ function App() {
                     allMovies={allMovies}
                     onButtonClick={handleMoviesButton}
                     savedMovies={savedMovies}
+                    onSearch={onSearch}
                   />
                   <Footer/>
                 </>
