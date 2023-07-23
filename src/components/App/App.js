@@ -82,6 +82,7 @@ function App() {
 
   function handleLogin(formValue) {
     auth.signin(formValue)
+    console.log(formValue);
       .then(() => {
         setLoggedIn(true);
         localStorage.setItem("loggedIn", true);
