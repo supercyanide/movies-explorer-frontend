@@ -1,5 +1,5 @@
-// const BASE_URL = 'https://api.movies.supercyanide.nomoredomains.rocks';
-const BASE_URL = 'http://localhost:3000';
+const BASE_URL = 'https://movies-api-js2p.onrender.com';
+// const BASE_URL = 'http://localhost:3000';
 
 function checkResponse(res) {
   if (res.ok) {

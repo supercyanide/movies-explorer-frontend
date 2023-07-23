@@ -1,7 +1,7 @@
 // const MOVIE_URL = 'https://api.nomoreparties.co';
 const MOVIE_URL = 'https://search.imdbot.workers.dev';
-// const mainApi = 'https://api.movies.supercyanide.nomoredomains.rocks';
-const mainApi = 'http://localhost:3000';
+const mainApi = 'https://movies-api-js2p.onrender.com';
+// const mainApi = 'http://localhost:3000';
 export default mainApi;
 
 export {
