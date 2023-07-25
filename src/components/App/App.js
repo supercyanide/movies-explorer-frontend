@@ -204,7 +204,9 @@ function App() {
   function onSearch(value) {
     moviesApi.search(value)
     .then((res)=>{
-      console.log(res)
+      console.log(res);
+      let moviesList = res.description.map((item) => convertMovieData(item)); // форматирование полей
+      localStorage.setItem("filter", JSON.stringify(moviesList));
     })
   }
 
