@@ -81,8 +81,8 @@ function App() {
   const closePopup = () => setIsPopupOpened(false);
 
   function handleLogin(formValue) {
-    auth.signin(formValue)
     console.log(formValue);
+    auth.signin(formValue)
       .then(() => {
         setLoggedIn(true);
         localStorage.setItem("loggedIn", true);
