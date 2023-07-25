@@ -17,21 +17,21 @@ export default function MoviesCard({movie, buttonClassName, onButtonClick, saved
         onButtonClick(movie);
     }
 
-    function formatDuration(duration){
-        const hours = Math.trunc(duration / 60);
-        const minutes = duration % 60;
-        return `${hours}ч ${minutes}м`;
-    };
+    // function formatDuration(duration){
+    //     const hours = Math.trunc(duration / 60);
+    //     const minutes = duration % 60;
+    //     return `${hours}ч ${minutes}м`;
+    // };
 
         return(
             <li className='card'>
-                <a target='_blank' href={movie.trailerLink} rel="noreferrer" className='card__trailer-link' >
-                    <img className='card__image' alt={movie.nameRU} src={movie.image}/>
+                <a target='_blank' href='' rel="noreferrer" className='card__trailer-link' >
+                    <img className='card__image' alt={movie.name} src={movie.image}/>
                 </a>
                 <div className='card__block'>
                     <div className='card__info'>
-                        <h2 className='card__title'>{movie.nameRU}</h2>
-                        <p className='card__duration'>{formatDuration(movie.duration)}</p>
+                        <h2 className='card__title'>{movie.name}</h2>
+                        <p className='card__duration'>{movie.year}</p>
                     </div>
                     <button type='button' onClick={location.pathname === '/movies'? handleClickLike: handleClickRemove} 
                     className={`card__button

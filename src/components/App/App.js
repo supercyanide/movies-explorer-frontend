@@ -35,6 +35,7 @@ function App() {
   const [isError, setIsError] = useState(false);
   const [isPopupOpened, setIsPopupOpened] = useState(false);
   const [popupMessage, setPopupMessage] = useState("");
+  const [searchedMovies, setSearchedMovies] = useState([]);
 
   useEffect(() => {
     if (token) {
@@ -205,8 +206,10 @@ function App() {
     moviesApi.search(value)
     .then((res)=>{
       console.log(res);
-      let moviesList = res.description.map((item) => convertMovieData(item)); // форматирование полей
+      let moviesList = res.description.map((item) => convertMovieData(item));
+       // форматирование полей
       localStorage.setItem("filter", JSON.stringify(moviesList));
+      searchedMovies(moviesList);
     })
   }
 
@@ -240,7 +243,7 @@ function App() {
                 <>
                   <Header isLogged={loggedIn}/>
                   <ProtectedRouteElement element={Movies} loggedIn={loggedIn}
-                    allMovies={allMovies}
+                    allMovies={searchedMovies}
                     onButtonClick={handleMoviesButton}
                     savedMovies={savedMovies}
                     onSearch={onSearch}

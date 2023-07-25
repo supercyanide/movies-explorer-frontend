@@ -51,7 +51,7 @@ export default function Movies({onButtonClick, allMovies, savedMovies, onSearch}
                 ? <Preloader/> 
                 : <MoviesCardList
                     savedMovies={savedMovies}
-                    movies={sortedMovies??localMovies}
+                    movies={allMovies??localMovies}
                     buttonClassName='card__like-button'
                     onButtonClick={onButtonClick}
 
