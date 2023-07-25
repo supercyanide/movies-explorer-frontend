@@ -23,9 +23,9 @@ class MoviesApi {
   } 
   search(value) {
     return this._request(`${this._baseUrl}`+'?q='+value, {
-      headers: {
-        'Content-type': 'application/json',
-      }
+      // headers: {
+      //   'Content-type': 'application/json',
+      // }
     })
   } 
 }
