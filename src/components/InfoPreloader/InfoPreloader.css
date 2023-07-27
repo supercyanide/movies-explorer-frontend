@@ -1,4 +1,4 @@
-@keyframes preloader-inside-white {
+@keyframes info-preloader-inside-white {
     0% {
         -webkit-transform: scale(0, 0);
         -moz-transform: scale(0, 0);
@@ -15,7 +15,7 @@
     }
 }
 
-@keyframes preloader-inside-red {
+@keyframes info-preloader-inside-red {
     0% {
         -webkit-transform: scale(0, 0);
         -moz-transform: scale(0, 0);
@@ -38,23 +38,37 @@
         transform: scale(1, 1);
     }
 }
+.container{
+    position: fixed;
+    display: none;
+    align-items: center;
+    justify-content: center;
+    background-color: rgba(0, 0, 0, 0.6);
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    z-index: 10;
+}
+.container_active{
+    display: flex;
+}
 
 
-.preloader {
+.info-preloader {
     display: flex;
     align-items: center;
     justify-content: center;
     z-index: 10;
-    padding: 20px;
 }
 
-.preloader__container {
+.info-preloader__container {
     width: 100px;
     height: 100px;
     position: relative;
 }
 
-.preloader__round {
+.info-preloader__round {
     width: 100px;
     height: 100px;
     position: absolute;
@@ -64,8 +78,8 @@
     border-radius: 50px;
 }
 
-.preloader__round::after,
-.preloader__round::before {
+.info-preloader__round::after,
+.info-preloader__round::before {
     content: '';
     width: 100px;
     height: 100px;
@@ -75,13 +89,13 @@
     border-radius: 50px;
 }
 
-.preloader__round::after {
+.info-preloader__round::after {
     background: white;
-    animation: preloader-inside-white 1s ease-in-out infinite;
+    animation: info-preloader-inside-white 1s ease-in-out infinite;
 }
 
-.preloader__round::before {
+.info-preloader__round::before {
     z-index: 10;
     background: #FF6838;
-    animation: preloader-inside-red 1s ease-in-out infinite;
+    animation: info-preloader-inside-red 1s ease-in-out infinite;
 }

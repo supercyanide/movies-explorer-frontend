@@ -9,7 +9,7 @@ import MoviesCard from '../MoviesCard/MoviesCard.js';
 import useDimensions from '../../hooks/useDimentions';
 import {mobileDefaultWidth, tabletDefaultWidth, desktopDefaultWidth, mobileOffset, tabletOffset, desktopOffset, desktopWidth, tabletWidth} from '../../utils/consts'
 
-export default function MoviesCardList({ movies, buttonClassName, onButtonClick, savedMovies}){
+export default function MoviesCardList({ movies, buttonClassName, onButtonClick, savedMovies, onCardClick}){
     const { width } = useDimensions();
 
     let defaultWidth = mobileDefaultWidth;
@@ -39,6 +39,7 @@ export default function MoviesCardList({ movies, buttonClassName, onButtonClick,
                         <MoviesCard
                             movie={movie}
                             key={i}
+                            onCardClick={onCardClick}
                             buttonClassName={buttonClassName}
                             onButtonClick={onButtonClick}
                             savedMovie={savedMovies? savedMovies.find(m => m.movieId === movie.movieId) : undefined}

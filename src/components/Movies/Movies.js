@@ -6,13 +6,12 @@ import { useState } from 'react';
 import {shortMoviesDuration} from '../../utils/consts'
 
 
-export default function Movies({onButtonClick, allMovies, savedMovies, onSearch}){
-    const [isPreloaderActive, setIsPreloaderActive] = useState(false);
+export default function Movies({onButtonClick, allMovies, savedMovies, onSearch, onCardClick, isPreloaderActive}){
     const localMovies = JSON.parse(localStorage.getItem('filtered'));
     const [sortedMovies, setSortedMovies] = useState()
 
     function filter(value,checked){
-        setIsPreloaderActive(true);
+        // setIsPreloaderActive(true);
         if (value===null) return
         if (checked) {
           return allMovies.filter((item) => 
@@ -40,7 +39,7 @@ export default function Movies({onButtonClick, allMovies, savedMovies, onSearch}
             localStorage.setItem('filtered', JSON.stringify(sortedMovieSearch));
             setSortedMovies(sortedMovieSearch);
         }
-        setIsPreloaderActive(false);
+        // setIsPreloaderActive(false);
 
     }
 
@@ -54,7 +53,7 @@ export default function Movies({onButtonClick, allMovies, savedMovies, onSearch}
                     movies={allMovies??localMovies}
                     buttonClassName='card__like-button'
                     onButtonClick={onButtonClick}
-
+                    onCardClick={onCardClick}
                 />
             }
         </main>

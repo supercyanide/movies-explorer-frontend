@@ -2,7 +2,7 @@ import './MoviesCard.css';
 import React from 'react';
 import { useLocation } from 'react-router-dom';
 
-export default function MoviesCard({movie, buttonClassName, onButtonClick, savedMovie }){
+export default function MoviesCard({movie, onButtonClick, savedMovie, onCardClick }){
     const location = useLocation();
 
     function handleClickLike(evt){
@@ -16,6 +16,9 @@ export default function MoviesCard({movie, buttonClassName, onButtonClick, saved
         evt.preventDefault();
         onButtonClick(movie);
     }
+    function handleClick(){
+        onCardClick(movie)
+    }
 
     // function formatDuration(duration){
     //     const hours = Math.trunc(duration / 60);
@@ -25,9 +28,9 @@ export default function MoviesCard({movie, buttonClassName, onButtonClick, saved
 
         return(
             <li className='card'>
-                <a target='_blank' href='' rel="noreferrer" className='card__trailer-link' >
-                    <img className='card__image' alt={movie.name} src={movie.image}/>
-                </a>
+                <div className='card__trailer-link' >
+                    <img className='card__image' alt={movie.name} onClick={handleClick} src={movie.image}/>
+                </div>
                 <div className='card__block'>
                     <div className='card__info'>
                         <h2 className='card__title'>{movie.name}</h2>

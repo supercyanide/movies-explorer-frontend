@@ -6,6 +6,8 @@ import { CurrentUserContext } from '../../contexts/currentUserContext';
 import errors from '../../utils/errors';
 import ProtectedRouteElement from '../ProtectedRoute';
 
+import InfoPreloader from '../InfoPreloader/InfoPreloader';
+
 import Header from '../Header/Header';
 import Movies from '../Movies/Movies';
 import Main from '../Main/Main';
@@ -16,11 +18,13 @@ import Register from '../Register/Register';
 import Login from '../Login/Login';
 import Page404 from '../Page404/Page404';
 import Popup from '../Popup/Popup';
+import InfoPopup from '../InfoPopup/InfoPopup';
 
 import * as auth from '../../utils/auth'
 import  moviesApi  from '../../utils/MoviesApi';
 import { convertMovieData } from '../../utils/convertMovieData';
 import api from '../../utils/Api';
+import { flags } from '../../utils/flags';
 
 function App() {
   const token = localStorage.getItem('token');
@@ -36,6 +40,10 @@ function App() {
   const [isPopupOpened, setIsPopupOpened] = useState(false);
   const [popupMessage, setPopupMessage] = useState("");
   const [searchedMovies, setSearchedMovies] = useState([]);
+  const [isPreloaderActive, setIsPreloaderActive] = useState(false);
+  const [isInfoPreloaderActive, setIsInfoPreloaderActive] = useState(false);
+  const [isInfoPopupOpened, setisInfoPopupOpened] = useState(false)
+  const [movieInfo, setMovieInfo] = useState('')
 
   useEffect(() => {
     if (token) {
@@ -55,7 +63,6 @@ function App() {
 
   useEffect(() => {
     if (loggedIn) {
-      // getAllMovies();
       api
         .getFavoriteMovies()
         .then((res)=> setSavedMovies(res))
@@ -79,7 +86,10 @@ function App() {
     else localStorage.setItem("savedMovies",null);
   },[savedMovies,])
 
-  const closePopup = () => setIsPopupOpened(false);
+  const closePopup = () => {
+    setIsPopupOpened(false)
+    setisInfoPopupOpened(false)
+  };
 
   function handleLogin(formValue) {
     console.log(formValue);
@@ -119,7 +129,7 @@ function App() {
     setCurrentUser({});
     setLoggedIn(false);
     setSavedMovies([]);
-    setAllMovies([]);
+    // setAllMovies([]);
     navigate('/');
   }
   
@@ -179,37 +189,50 @@ function App() {
     removeFromSaved(movie._id);
   }
 
-  const extractAllMoviesLocal = () => {
-    let allMoviesLocal = JSON.parse(localStorage.getItem("allMovies"));
-    if (!allMoviesLocal) {
-      return (allMoviesLocal = []);
-    }
-    return allMoviesLocal;
-  };
-
-  const [allMovies, setAllMovies] = useState(extractAllMoviesLocal());
-  
-
-  const getAllMovies = () => {
-    moviesApi.getMovies()
-      .then((res) => {
-        let moviesList = res.map((item) => convertMovieData(item)); // форматирование полей
-        localStorage.setItem("allMovies", JSON.stringify(moviesList));
-        setAllMovies(moviesList);
-      })
-      .catch((err) => {
-        console.log(err)}
-      );
-  };
+  function onCardClick(movie){
+    setIsInfoPreloaderActive(true);
+    moviesApi.getInfo(movie.movieId)
+    .then((res)=>{
+      
+      const name = res.short.name
+      let rating
+      if (res.short.aggregateRating){
+        rating = res.short.aggregateRating.ratingValue
+      }
+      const description = res.short.description
+      const genre = res.short.genre
+      let trailer
+      if (res.short.trailer){
+        trailer = res.short.trailer.url
+      }
+      const duration=res.top.runtime.displayableProperty.value.plainText
+      const year = res.main.releaseYear.year
+      const country = res.main.countriesOfOrigin.countries[0].text + " "+(flags.find(element => element.name === res.main.countriesOfOrigin.countries[0].text).emoji);
+      const image = res.short.image
+      setMovieInfo({name, rating, description, genre, trailer, duration, year, country, image})
+      setIsInfoPreloaderActive(false)
+      setisInfoPopupOpened(true);
+    })
+    .catch((err)=>{
+      setIsInfoPreloaderActive(false)
+      console.log(err)
+    })
+  }
 
   function onSearch(value) {
+    setIsPreloaderActive(true);
     moviesApi.search(value)
     .then((res)=>{
-      console.log(res);
       let moviesList = res.description.map((item) => convertMovieData(item));
        // форматирование полей
       localStorage.setItem("filter", JSON.stringify(moviesList));
-      searchedMovies(moviesList);
+      setSearchedMovies(moviesList);
+    })
+    .catch((err) => {
+      console.log(err)}
+    )
+    .finally(()=>{
+      setIsPreloaderActive(false);
     })
   }
 
@@ -242,11 +265,15 @@ function App() {
               <Route path='/movies' element={
                 <>
                   <Header isLogged={loggedIn}/>
+                  <InfoPreloader isActive={isInfoPreloaderActive}/>
+                  <InfoPopup onClose={closePopup} isOpen={isInfoPopupOpened} movieInfo={movieInfo} ></InfoPopup>
                   <ProtectedRouteElement element={Movies} loggedIn={loggedIn}
                     allMovies={searchedMovies}
                     onButtonClick={handleMoviesButton}
                     savedMovies={savedMovies}
                     onSearch={onSearch}
+                    onCardClick={onCardClick}
+                    isPreloaderActive={isPreloaderActive}
                   />
                   <Footer/>
                 </>
