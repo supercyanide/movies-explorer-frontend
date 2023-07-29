@@ -1,6 +1,6 @@
 import './InfoPopup.css';
 
-export default function InfoPopup({onClose, isOpen, movieInfo}){
+export default function InfoPopup({onClose, isOpen, movieInfo, onButtonClick}){
     const backgroundImage={
         backgroundImage: 'url(' + movieInfo.image + ')',
     }
@@ -17,6 +17,14 @@ export default function InfoPopup({onClose, isOpen, movieInfo}){
     else if(!movieInfo.rating){
         movieRatingColor=''
     }
+    function handleClickLike(evt){
+        evt.preventDefault()
+        let btn = evt.target;
+        onButtonClick(movieInfo);
+        btn.classList.toggle('buttons__like-button_active') 
+        
+    }
+    console.log(movieInfo.genre)
     return(
         <div className={`info-popup ${isOpen ? 'info-popup_opened' : ''}`}>
             <div style={backgroundImage} className='info-popup__background'/>
@@ -32,7 +40,7 @@ export default function InfoPopup({onClose, isOpen, movieInfo}){
                         <div className='info-popup__items-line'></div>
                         <p className='info-popup__info-item'>{movieInfo.year}</p>
                     </div>
-                    <p className='info-popup__info-item'>Animation, Drama, Fantasy</p>
+                    <p className='info-popup__info-item'>{ movieInfo.genre? (movieInfo.genre).join(', ') : ''}</p>
                 </div>
                 <p className='info-popup__info-item info-popup__info-item_discription'>{movieInfo.description}</p>
             </div>
@@ -41,7 +49,7 @@ export default function InfoPopup({onClose, isOpen, movieInfo}){
                     <span className='button__play-logo'/>
                     Watch trailer
                 </button>
-                <button className='buttons__like-button'>
+                <button onClick={handleClickLike} className={`buttons__like-button ${movieInfo.isSavedMovie ?'buttons__like-button_active':''}`}>
                 </button>
             </div>
                 <button type="button" onClick={onClose} className="info-popup__close"></button>

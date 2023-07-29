@@ -1,5 +1,6 @@
 import './App.css';
 import React from 'react';
+import { useLocation } from 'react-router-dom';
 import { useState, useEffect } from 'react';
 import { Route, Routes, useNavigate, Navigate} from 'react-router-dom';
 import { CurrentUserContext } from '../../contexts/currentUserContext';
@@ -34,7 +35,7 @@ function App() {
   
   const [currentUser, setCurrentUser] = useState({});
   const [isSubmitVisible, setSubmitVisible] = useState(false);
-  
+
   const [savedMovies, setSavedMovies] = useState(JSON.parse(localStorage.getItem('savedMovies'))||[]);
   const [isError, setIsError] = useState(false);
   const [isPopupOpened, setIsPopupOpened] = useState(false);
@@ -44,7 +45,7 @@ function App() {
   const [isInfoPreloaderActive, setIsInfoPreloaderActive] = useState(false);
   const [isInfoPopupOpened, setisInfoPopupOpened] = useState(false)
   const [movieInfo, setMovieInfo] = useState('')
-
+  const location = useLocation();
   useEffect(() => {
     if (token) {
       auth.checkToken(token)
@@ -83,8 +84,8 @@ function App() {
     if (savedMovies && savedMovies.length) {
       localStorage.setItem("savedMovies", JSON.stringify(savedMovies));
     }
-    else localStorage.setItem("savedMovies",null);
-  },[savedMovies,])
+    else localStorage.setItem("savedMovies", '[]');
+  },[savedMovies])
 
   const closePopup = () => {
     setIsPopupOpened(false)
@@ -92,7 +93,6 @@ function App() {
   };
 
   function handleLogin(formValue) {
-    console.log(formValue);
     auth.signin(formValue)
       .then(() => {
         setLoggedIn(true);
@@ -129,7 +129,6 @@ function App() {
     setCurrentUser({});
     setLoggedIn(false);
     setSavedMovies([]);
-    // setAllMovies([]);
     navigate('/');
   }
   
@@ -169,6 +168,13 @@ function App() {
     const data = {
       ...movie
     };
+    delete data.rating
+    delete data.description
+    delete data.genre
+    delete data.isSavedMovie
+    delete data.trailer
+    delete data.duration
+    delete data.country
     api
       .postMovie(data)
       .then((movie) => {
@@ -182,18 +188,29 @@ function App() {
     if (savedMovie){
       removeFromSaved(savedMovie._id)
     }
-    else {addToSaved(movie);}
+    else {
+      addToSaved(movie)
+    }
   }
 
   function handleSavedMoviesButton(movie) {
+    console.log(movie)
     removeFromSaved(movie._id);
+  }
+  function handleSavedMoviesInfoPopupButton(movie) {
+    console.log(movie, savedMovies)
+    const saved = savedMovies.find(({ movieId }) => movieId === movie.movieId)
+    removeFromSaved(saved._id);
+    setisInfoPopupOpened(false)
+
   }
 
   function onCardClick(movie){
     setIsInfoPreloaderActive(true);
     moviesApi.getInfo(movie.movieId)
     .then((res)=>{
-      
+      const isSavedMovie = Boolean(savedMovies.find(({ movieId }) => movieId === movie.movieId));
+      const movieId = movie.movieId;
       const name = res.short.name
       let rating
       if (res.short.aggregateRating){
@@ -209,7 +226,7 @@ function App() {
       const year = res.main.releaseYear.year
       const country = res.main.countriesOfOrigin.countries[0].text + " "+(flags.find(element => element.name === res.main.countriesOfOrigin.countries[0].text).emoji);
       const image = res.short.image
-      setMovieInfo({name, rating, description, genre, trailer, duration, year, country, image})
+      setMovieInfo({name, rating, description, genre, trailer, duration, year, country, image, isSavedMovie, movieId})
       setIsInfoPreloaderActive(false)
       setisInfoPopupOpened(true);
     })
@@ -266,7 +283,7 @@ function App() {
                 <>
                   <Header isLogged={loggedIn}/>
                   <InfoPreloader isActive={isInfoPreloaderActive}/>
-                  <InfoPopup onClose={closePopup} isOpen={isInfoPopupOpened} movieInfo={movieInfo} ></InfoPopup>
+                  <InfoPopup onButtonClick = {handleMoviesButton} onClose={closePopup} isOpen={isInfoPopupOpened} movieInfo={movieInfo} savedMovies={savedMovies} ></InfoPopup>
                   <ProtectedRouteElement element={Movies} loggedIn={loggedIn}
                     allMovies={searchedMovies}
                     onButtonClick={handleMoviesButton}
@@ -281,12 +298,15 @@ function App() {
               <Route path='/saved-movies' element={
                 <>
                   <Header isLogged={loggedIn}/>
+                  <InfoPreloader isActive={isInfoPreloaderActive}/>
+                  <InfoPopup onButtonClick = {handleSavedMoviesInfoPopupButton} onClose={closePopup} isOpen={isInfoPopupOpened} movieInfo={movieInfo} ></InfoPopup>
                   <ProtectedRouteElement 
                     element={SavedMovies} 
                     loggedIn={loggedIn}
                     onRemove={handleSavedMoviesButton}
                     savedMovies={savedMovies} 
                     setSavedMovies={setSavedMovies}
+                    onCardClick={onCardClick}
                   />
                   <Footer/>
                 </>

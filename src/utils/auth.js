@@ -9,7 +9,6 @@ function checkResponse(res) {
 }
 
 function request(endpoint, options) {
-  console.log(endpoint, options)
   return fetch(`${BASE_URL}/${endpoint}`, options).then(checkResponse)
 }
 

@@ -4,12 +4,15 @@ import './SavedMovies.css';
 import MoviesCardList from '../MoviesCardList/MoviesCardList';
 import SearchForm from '../SearchForm/SearchForm';
 import { useLocation } from 'react-router-dom';
-import {shortMoviesDuration} from '../../utils/consts'
 
 
-export default function SavedMovies({ onRemove, savedMovies, setSavedMovies }){
-    const [sortedMovies,setSortedMovies] = useState(savedMovies);
+export default function SavedMovies({ onRemove, savedMovies, setSavedMovies, onCardClick}){
+    const [sortedMovies, setSortedMovies] = useState(savedMovies);
     const [lastSearchValue, setLastSearchValue] = useState('');
+
+    useEffect(()=> {
+        setSortedMovies(savedMovies);
+    },[savedMovies])
 
 
     const location = useLocation();
@@ -20,33 +23,13 @@ export default function SavedMovies({ onRemove, savedMovies, setSavedMovies }){
         }
     },[location.pathname])
     
-    function filter(value,checked){
-        if (value && checked) {
-          return savedMovies.filter((item) =>
-            ((((item.nameEN).toLowerCase()).includes(value.toLowerCase())||((item.nameRU).toLowerCase()).includes(value.toLowerCase())) && item.duration <= shortMoviesDuration)
-          )
-        }
-        else if(!checked) {
-            return (
-                savedMovies.filter((item) => (((item.nameEN).toLowerCase()).includes(value.toLowerCase()))||(((item.nameRU).toLowerCase()).includes(value.toLowerCase())))
-            )
-        }
-    }
 
-    function handleSavedSearch({savedValue, isSavedChecked}){
+    function handleSavedSearch({savedValue}){
         setLastSearchValue(savedValue);
-        if(savedMovies){
-            const sortedMovieSearch = filter(savedValue, isSavedChecked);
-            setSortedMovies(sortedMovieSearch);
-        }
-    }
-
-    function handleCheckboxSearch(checkboxValue){
-        if (lastSearchValue){
-            const sortedMovieSearch = filter(lastSearchValue, checkboxValue);
-            if (sortedMovieSearch) setSortedMovies(sortedMovieSearch)
-        }
-        else return
+        // if(savedMovies){
+        //     const sortedMovieSearch = filter(savedValue);
+        //     setSortedMovies(sortedMovieSearch);
+        // }
     }
 
     function handleRemove(movie){
@@ -58,12 +41,12 @@ export default function SavedMovies({ onRemove, savedMovies, setSavedMovies }){
         <main className='saved-page'>
             <SearchForm
                 handleSavedSearch={handleSavedSearch}
-                handleCheckboxSearch={handleCheckboxSearch}
             />
             <MoviesCardList
                 movies={sortedMovies}
                 buttonClassName='card__remove-button'
                 onButtonClick={handleRemove}
+                onCardClick={onCardClick}
             />
         </main>
     )

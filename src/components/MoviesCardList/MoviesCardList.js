@@ -25,7 +25,6 @@ export default function MoviesCardList({ movies, buttonClassName, onButtonClick,
 
     const location = useLocation();
     const [endRange, setEndRange] = useState(defaultWidth);
-    
     return(
         <section className='movies'>
             {

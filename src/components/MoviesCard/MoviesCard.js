@@ -17,31 +17,25 @@ export default function MoviesCard({movie, onButtonClick, savedMovie, onCardClic
         onButtonClick(movie);
     }
     function handleClick(){
-        onCardClick(movie)
+        onCardClick(movie);
     }
 
-    // function formatDuration(duration){
-    //     const hours = Math.trunc(duration / 60);
-    //     const minutes = duration % 60;
-    //     return `${hours}ч ${minutes}м`;
-    // };
-
-        return(
-            <li className='card'>
-                <div className='card__trailer-link' >
-                    <img className='card__image' alt={movie.name} onClick={handleClick} src={movie.image}/>
+    return(
+        <li className='card'>
+            <div className='card__trailer-link' >
+                <img className='card__image' alt={movie.name} onClick={handleClick} src={movie.image}/>
+            </div>
+            <div className='card__block'>
+                <div className='card__info'>
+                    <h2 className='card__title'>{movie.name}</h2>
+                    <p className='card__duration'>{movie.year}</p>
                 </div>
-                <div className='card__block'>
-                    <div className='card__info'>
-                        <h2 className='card__title'>{movie.name}</h2>
-                        <p className='card__duration'>{movie.year}</p>
-                    </div>
-                    <button type='button' onClick={location.pathname === '/movies'? handleClickLike: handleClickRemove} 
-                    className={`card__button
-                    ${location.pathname === '/movies' && savedMovie ? "card__like-button_active": ""}
-                    ${location.pathname === '/movies' ? "card__like-button" : "card__remove-button"}
-                    `}></button>
-                </div>
-            </li>
-        )
+                <button type='button' onClick={location.pathname === '/movies'? handleClickLike: handleClickRemove} 
+                className={`card__button
+                ${location.pathname === '/movies' && savedMovie ? "card__like-button_active": ""}
+                ${location.pathname === '/movies' ? "card__like-button" : "card__remove-button"}
+                `}></button>
+            </div>
+        </li>
+    )
 }
