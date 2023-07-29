@@ -6,7 +6,7 @@ export default function Techs() {
         <section id='techs' className="techs">
             <MainTitle text="Технологии"/>
             <h3 className="techs__title">7 технологий</h3>
-            <p className="techs__subtitle">На курсе веб-разработки мы освоили технологии, которые применили в дипломном проекте.</p>
+            <p className="techs__subtitle">За время самообучения я овладела следующими технологиями:</p>
             <ul className="techs__techs">
                 <li className="techs__tech">HTML</li>
                 <li className="techs__tech">CSS</li>

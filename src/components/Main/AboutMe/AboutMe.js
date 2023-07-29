@@ -1,22 +1,21 @@
 import './AboutMe.css';
-import photo from '../../../images/photo.png'
+import photo from '../../../images/photo.jpg'
 import MainTitle from '../MainTitle/MainTitle';
 
 export default function AboutMe() {
     return (
         <section id='about-me' className="about-me">
-            <MainTitle text="Студент" />
+            <MainTitle text="Разработчик" />
             <div className="about-me__person">
-                <h3 className="about-me__name">Виталий</h3>
-                <p className="about-me__about">Фронтенд-разработчик, 30 лет</p>
-                <p className="about-me__bio">Я родился и живу в Саратове, закончил факультет экономики СГУ. У меня есть жена и дочь. Я люблю слушать музыку, а ещё увлекаюсь бегом. Недавно начал кодить. 
-                    С 2015 года работал в компании «СКБ Контур». После того, как прошёл курс по веб-разработке, начал заниматься фриланс-заказами и ушёл с постоянной работы.
+                <h3 className="about-me__name">Лиля</h3>
+                <p className="about-me__about">Фронтенд-разработчик, 22 года</p>
+                <p className="about-me__bio">Я родилась в городе Ростов-на-Дону. Закончила колледж по программе "Гостиничный сервис", но в итоге решила полностью изменить жизнь и поступить в ДГТУ на направление "Прикладная информатика", выбрав профиль разработки игр. А еще я отличный работник. Каждый день на работе для меня как праздник!
                 </p>
-
                 <ul className="about-me__contacts">
                     <li><a target="_blank" href="https://github.com/supercyanide" className="about-me__contact" rel="noreferrer">Github</a></li>
+                    <li><a target="_blank" href="https://www.linkedin.com/in/lilia-schedrina-ba3588279" className="about-me__contact" rel="noreferrer">Linkedin</a></li>
                 </ul>
-                <img src={photo} alt="Виталя,30 лет, фронтенд разработчик" className="about-me__photo"/>
+                <img src={photo} alt="Фронтенд разработчик" className="about-me__photo"/>
             </div>
         </section>
     );
