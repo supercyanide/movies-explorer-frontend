@@ -24,7 +24,6 @@ export default function InfoPopup({onClose, isOpen, movieInfo, onButtonClick}){
         btn.classList.toggle('buttons__like-button_active') 
         
     }
-    console.log(movieInfo.genre)
     return(
         <div className={`info-popup ${isOpen ? 'info-popup_opened' : ''}`}>
             <div style={backgroundImage} className='info-popup__background'/>

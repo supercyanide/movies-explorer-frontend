@@ -10,6 +10,8 @@ import useDimensions from '../../hooks/useDimentions';
 import {mobileDefaultWidth, tabletDefaultWidth, desktopDefaultWidth, mobileOffset, tabletOffset, desktopOffset, desktopWidth, tabletWidth} from '../../utils/consts'
 
 export default function MoviesCardList({ movies, buttonClassName, onButtonClick, savedMovies, onCardClick}){
+    const location = useLocation();
+    const searchedMovies = JSON.parse(localStorage.getItem('filter'))||[]
     const { width } = useDimensions();
 
     let defaultWidth = mobileDefaultWidth;
@@ -22,18 +24,28 @@ export default function MoviesCardList({ movies, buttonClassName, onButtonClick,
         defaultWidth = tabletDefaultWidth;
         offset = tabletOffset;
     }
-
-    const location = useLocation();
+    
     const [endRange, setEndRange] = useState(defaultWidth);
     return(
         <section className='movies'>
             {
-            ( movies === null)
+            ( searchedMovies == null)||(movies==null)
             ? 
             <h2 className="movies-card-list__title">Фильмов не найдено</h2>
             :
             <ul className={`movies-card-list ${location.pathname ==='/saved-movies' ? '' : 'movies-card-list_saved'}`}>
-                {   
+                {   location.pathname ===('/movies')?
+                    searchedMovies.slice(0, endRange).map((movie, i) => (
+                        <MoviesCard
+                            movie={movie}
+                            key={i}
+                            onCardClick={onCardClick}
+                            buttonClassName={buttonClassName}
+                            onButtonClick={onButtonClick}
+                            savedMovie={savedMovies? savedMovies.find(m => m.movieId === movie.movieId) : undefined}
+                        />
+                    ))
+                    :
                     movies.slice(0, endRange).map((movie, i) => (
                         <MoviesCard
                             movie={movie}
@@ -44,6 +56,7 @@ export default function MoviesCardList({ movies, buttonClassName, onButtonClick,
                             savedMovie={savedMovies? savedMovies.find(m => m.movieId === movie.movieId) : undefined}
                         />
                     ))
+
                 }
             </ul>
             }

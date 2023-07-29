@@ -139,16 +139,15 @@
     background-color: transparent;
     cursor: pointer;
     transition: all 0.3s ease;
+    background-repeat: no-repeat;
 }
-/* .buttons__like-button:hover{
+.buttons__like-button:hover{
     background-image: url(../../images/info-like-button_active.svg);
-} */
+}
 .buttons__like-button_active{
     background-image: url(../../images/info-like-button_active.svg);
 }
-/* .buttons__like-button_active:hover{
-    background-image: url(../../images/info-like-button.svg);
-} */
+
 .buttons{
     display: flex;
     flex-direction: row;

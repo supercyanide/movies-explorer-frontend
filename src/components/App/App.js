@@ -45,7 +45,7 @@ function App() {
   const [isInfoPreloaderActive, setIsInfoPreloaderActive] = useState(false);
   const [isInfoPopupOpened, setisInfoPopupOpened] = useState(false)
   const [movieInfo, setMovieInfo] = useState('')
-  const location = useLocation();
+
   useEffect(() => {
     if (token) {
       auth.checkToken(token)
@@ -194,15 +194,12 @@ function App() {
   }
 
   function handleSavedMoviesButton(movie) {
-    console.log(movie)
     removeFromSaved(movie._id);
   }
   function handleSavedMoviesInfoPopupButton(movie) {
-    console.log(movie, savedMovies)
     const saved = savedMovies.find(({ movieId }) => movieId === movie.movieId)
     removeFromSaved(saved._id);
     setisInfoPopupOpened(false)
-
   }
 
   function onCardClick(movie){

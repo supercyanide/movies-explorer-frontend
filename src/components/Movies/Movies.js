@@ -10,7 +10,6 @@ export default function Movies({onButtonClick, allMovies, savedMovies, onSearch,
     function handleSearch(){
         onSearch(localStorage.getItem('lastSearchValue'))
     }
-
     return(
         <main className='movies-page'>
             <SearchForm handleSearch={handleSearch}/>
