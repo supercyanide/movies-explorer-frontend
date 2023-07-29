@@ -6,17 +6,17 @@ export default function Portfolio() {
             <h2 className="portfolio__title">Портфолио</h2>
             <ul className="portfolio__items">
                 <li className="portfolio__item">
-                    <a href="https://github.com/supercyanide/how-to-learn" target="_blank" className="portfolio__button" rel="noreferrer">Статичный сайт
+                    <a href="https://github.com/supercyanide" target="_blank" className="portfolio__button" rel="noreferrer">Ссылка на то чего нет
                         <span className='portfolio__arrow'>↗</span>
                     </a>
                 </li>
                 <li className="portfolio__item">
-                    <a href="https://github.com/supercyanide/russian-travel" target="_blank" className="portfolio__button" rel="noreferrer">Адаптивный сайт
+                    <a href="https://github.com/supercyanide" target="_blank" className="portfolio__button" rel="noreferrer">Ссылка на то чего нет
                         <span className='portfolio__arrow'>↗</span>
                     </a>
                 </li>
                 <li className="portfolio__item">
-                    <a href="https://github.com/supercyanide/mesto" target="_blank" className="portfolio__button" rel="noreferrer">Одностраничное приложение
+                    <a href="https://github.com/supercyanide" target="_blank" className="portfolio__button" rel="noreferrer">Ссылка на то чего нет
                         <span className='portfolio__arrow'>↗</span>
                     </a>
                 </li>

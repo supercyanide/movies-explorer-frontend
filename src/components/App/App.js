@@ -1,10 +1,13 @@
 import './App.css';
 import React from 'react';
+import { useLocation } from 'react-router-dom';
 import { useState, useEffect } from 'react';
 import { Route, Routes, useNavigate, Navigate} from 'react-router-dom';
 import { CurrentUserContext } from '../../contexts/currentUserContext';
 import errors from '../../utils/errors';
 import ProtectedRouteElement from '../ProtectedRoute';
+
+import InfoPreloader from '../InfoPreloader/InfoPreloader';
 
 import Header from '../Header/Header';
 import Movies from '../Movies/Movies';
@@ -16,11 +19,13 @@ import Register from '../Register/Register';
 import Login from '../Login/Login';
 import Page404 from '../Page404/Page404';
 import Popup from '../Popup/Popup';
+import InfoPopup from '../InfoPopup/InfoPopup';
 
 import * as auth from '../../utils/auth'
 import  moviesApi  from '../../utils/MoviesApi';
 import { convertMovieData } from '../../utils/convertMovieData';
 import api from '../../utils/Api';
+import { flags } from '../../utils/flags';
 
 function App() {
   const token = localStorage.getItem('token');
@@ -30,11 +35,16 @@ function App() {
   
   const [currentUser, setCurrentUser] = useState({});
   const [isSubmitVisible, setSubmitVisible] = useState(false);
-  
+
   const [savedMovies, setSavedMovies] = useState(JSON.parse(localStorage.getItem('savedMovies'))||[]);
   const [isError, setIsError] = useState(false);
   const [isPopupOpened, setIsPopupOpened] = useState(false);
   const [popupMessage, setPopupMessage] = useState("");
+  const [searchedMovies, setSearchedMovies] = useState([]);
+  const [isPreloaderActive, setIsPreloaderActive] = useState(false);
+  const [isInfoPreloaderActive, setIsInfoPreloaderActive] = useState(false);
+  const [isInfoPopupOpened, setisInfoPopupOpened] = useState(false)
+  const [movieInfo, setMovieInfo] = useState('')
 
   useEffect(() => {
     if (token) {
@@ -54,7 +64,6 @@ function App() {
 
   useEffect(() => {
     if (loggedIn) {
-      getAllMovies();
       api
         .getFavoriteMovies()
         .then((res)=> setSavedMovies(res))
@@ -75,10 +84,13 @@ function App() {
     if (savedMovies && savedMovies.length) {
       localStorage.setItem("savedMovies", JSON.stringify(savedMovies));
     }
-    else localStorage.setItem("savedMovies",null);
-  },[savedMovies,])
+    else localStorage.setItem("savedMovies", '[]');
+  },[savedMovies])
 
-  const closePopup = () => setIsPopupOpened(false);
+  const closePopup = () => {
+    setIsPopupOpened(false)
+    setisInfoPopupOpened(false)
+  };
 
   function handleLogin(formValue) {
     auth.signin(formValue)
@@ -117,7 +129,6 @@ function App() {
     setCurrentUser({});
     setLoggedIn(false);
     setSavedMovies([]);
-    setAllMovies([]);
     navigate('/');
   }
   
@@ -157,6 +168,13 @@ function App() {
     const data = {
       ...movie
     };
+    delete data.rating
+    delete data.description
+    delete data.genre
+    delete data.isSavedMovie
+    delete data.trailer
+    delete data.duration
+    delete data.country
     api
       .postMovie(data)
       .then((movie) => {
@@ -170,36 +188,67 @@ function App() {
     if (savedMovie){
       removeFromSaved(savedMovie._id)
     }
-    else {addToSaved(movie);}
+    else {
+      addToSaved(movie)
+    }
   }
 
   function handleSavedMoviesButton(movie) {
     removeFromSaved(movie._id);
   }
+  function handleSavedMoviesInfoPopupButton(movie) {
+    const saved = savedMovies.find(({ movieId }) => movieId === movie.movieId)
+    removeFromSaved(saved._id);
+    setisInfoPopupOpened(false)
+  }
 
-  const extractAllMoviesLocal = () => {
-    let allMoviesLocal = JSON.parse(localStorage.getItem("allMovies"));
-    if (!allMoviesLocal) {
-      return (allMoviesLocal = []);
-    }
-    return allMoviesLocal;
-  };
+  function onCardClick(movie){
+    setIsInfoPreloaderActive(true);
+    moviesApi.getInfo(movie.movieId)
+    .then((res)=>{
+      const isSavedMovie = Boolean(savedMovies.find(({ movieId }) => movieId === movie.movieId));
+      const movieId = movie.movieId;
+      const name = res.short.name
+      let rating
+      if (res.short.aggregateRating){
+        rating = res.short.aggregateRating.ratingValue
+      }
+      const description = res.short.description
+      const genre = res.short.genre
+      let trailer
+      if (res.short.trailer){
+        trailer = res.short.trailer.url
+      }
+      const duration=res.top.runtime.displayableProperty.value.plainText
+      const year = res.main.releaseYear.year
+      const country = res.main.countriesOfOrigin.countries[0].text + " "+(flags.find(element => element.name === res.main.countriesOfOrigin.countries[0].text).emoji);
+      const image = res.short.image
+      setMovieInfo({name, rating, description, genre, trailer, duration, year, country, image, isSavedMovie, movieId})
+      setIsInfoPreloaderActive(false)
+      setisInfoPopupOpened(true);
+    })
+    .catch((err)=>{
+      setIsInfoPreloaderActive(false)
+      console.log(err)
+    })
+  }
 
-  const [allMovies, setAllMovies] = useState(extractAllMoviesLocal());
-  
-
-  const getAllMovies = () => {
-    moviesApi.getMovies()
-      .then((res) => {
-        console.log()
-        let moviesList = res.map((item) => convertMovieData(item)); // форматирование полей
-        localStorage.setItem("allMovies", JSON.stringify(moviesList));
-        setAllMovies(moviesList);
-      })
-      .catch((err) => {
-        console.log(err)}
-      );
-  };
+  function onSearch(value) {
+    setIsPreloaderActive(true);
+    moviesApi.search(value)
+    .then((res)=>{
+      let moviesList = res.description.map((item) => convertMovieData(item));
+       // форматирование полей
+      localStorage.setItem("filter", JSON.stringify(moviesList));
+      setSearchedMovies(moviesList);
+    })
+    .catch((err) => {
+      console.log(err)}
+    )
+    .finally(()=>{
+      setIsPreloaderActive(false);
+    })
+  }
 
   return (
     <div className='page'>
@@ -230,10 +279,15 @@ function App() {
               <Route path='/movies' element={
                 <>
                   <Header isLogged={loggedIn}/>
+                  <InfoPreloader isActive={isInfoPreloaderActive}/>
+                  <InfoPopup onButtonClick = {handleMoviesButton} onClose={closePopup} isOpen={isInfoPopupOpened} movieInfo={movieInfo} savedMovies={savedMovies} ></InfoPopup>
                   <ProtectedRouteElement element={Movies} loggedIn={loggedIn}
-                    allMovies={allMovies}
+                    allMovies={searchedMovies}
                     onButtonClick={handleMoviesButton}
                     savedMovies={savedMovies}
+                    onSearch={onSearch}
+                    onCardClick={onCardClick}
+                    isPreloaderActive={isPreloaderActive}
                   />
                   <Footer/>
                 </>
@@ -241,12 +295,15 @@ function App() {
               <Route path='/saved-movies' element={
                 <>
                   <Header isLogged={loggedIn}/>
+                  <InfoPreloader isActive={isInfoPreloaderActive}/>
+                  <InfoPopup onButtonClick = {handleSavedMoviesInfoPopupButton} onClose={closePopup} isOpen={isInfoPopupOpened} movieInfo={movieInfo} ></InfoPopup>
                   <ProtectedRouteElement 
                     element={SavedMovies} 
                     loggedIn={loggedIn}
                     onRemove={handleSavedMoviesButton}
                     savedMovies={savedMovies} 
                     setSavedMovies={setSavedMovies}
+                    onCardClick={onCardClick}
                   />
                   <Footer/>
                 </>
